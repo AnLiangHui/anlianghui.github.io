@@ -15,7 +15,9 @@ You can use React as a `<script>` tag from a [CDN](https://reactjs.org/docs/cdn-
 , or as a `react` package on [npm](https://www.npmjs.com/package/react).
 ## Documentation  
 You can find the React documentaition [on the website](https://reactjs.org/docs).  
+
 Check out the [Getting Started](https://reactjs.org/docs/getting-started.html) page for a quick overview.  
+
 The documentation is divided into serveral sections:  
 * [Tutorial](https://reactjs.org/tutorial/tutorial.html)
 * [Main Concepts](https://reactjs.org/docs/hello-world.html)
