@@ -101,11 +101,14 @@
       <dt>肤色</dt>
         <dd><input type="color"></dd>
       <dt>自我介绍</dt>
-        <dd><textarea name="" id="" cols="30" rows="10" placeholder="</textarea>"></textarea></dd>
+        <dd><textarea name="" id="" cols="30" rows="10" placeholder="&lt;textarea&gt;"></textarea></dd>
     </dl>
   </form>
   <hr>
   <table border="1">
+    <tr>
+      <th colspan="4">货品列表</th>
+    </tr>
     <tr>
       <td>编号</td>
       <td>品名</td>
@@ -115,13 +118,13 @@
     <tr>
       <td>001</td>
       <td>苹果</td>
-      <td>5</td>
+      <td rowspan="2">5</td>
       <td>8</td>
     </tr>
     <tr>
       <td>001</td>
       <td>桔子</td>
-      <td>5</td>
+     
       <td>8</td>
     </tr>
     <tr>
@@ -138,14 +141,17 @@
     </tr>
   </table>
   <hr>
-  <img width="300" src="https://drscdn.500px.org/photo/174778125/m%3D1170_k%3D1/2841ccf2a3720e8e794a6a6930f6ff2c" alt="">
+  <img width="300" src="https://drscdn.500px.org/photo/174778125/m%3D1170_k%3D1/2841ccf2a3720e8e794a6a6930f6ff2c" usemap="#cat" alt="">
+  <map name="cat">
+    <area title="abc" shape="rect" coords="54, 190, 200, 105" href="https://www.mi.com/" alt="">
+    <area shape="circle" coords="130, 260, 80" href="" alt="">
+    <area shape="polygon" coords="55, 75, 20, 280, 170, 390, 230, 270, 195, 80, 130, 90, 55, 75" href="" alt="">
+  </map>
   <a name="bottom"></a>
   <hr>
   <a href="">点击我会在下面的frame里打开小米商城,但为什么打不开呢?</a><br>
-  <iframe src="https://www.mi.com/" frameborder="0" width="300" height="200"></iframe>
-  <p>怎样&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这两个字之间空这么大呢?</p>
-  <p>怎样在页面中显示下面的内容呢?</p>
-  <p>&lt;span&gt;&lt;/span&gt;</p>
+  <p>怎样&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这两个字之间空这么大呢?</p>
+  <p>怎样在页面中显示下面的内容呢?<br>&lt;span&gt;&lt;/span&gt;</p>
 </body>
 
 </html>
