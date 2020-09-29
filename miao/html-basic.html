@@ -18,8 +18,7 @@
   <a href="https://www.jd.com/" target="-blank">在新窗口打开京东</a>
   <a href="mailto:1210948159@qq.com">点击给我发邮件</a>
   <a href="#bottom">跳转到本页的底部</a>
-  <a href="https://drscdn.500px.org/photo/229389427/m%3D1170/v2?user_id=7012987&webp=true&sig=196fa0c161aa562478d08571764872f7d69a346c3c0b2e12aa00e2c6414eb28b"
-    download="putao.jpg">点我可以下载一个文件</a><br>
+  <a href="index.html" download>点我可以下载一个文件</a><br>
   <img width="200" height="200"
     src="https://drscdn.500px.org/photo/229389427/m%3D1170/v2?user_id=7012987&webp=true&sig=196fa0c161aa562478d08571764872f7d69a346c3c0b2e12aa00e2c6414eb28b"
     alt="">
@@ -89,7 +88,22 @@
         </dd>
       <dt>年龄</dt>
         <dd>
-          <select name="" id="" value="请选择"></select>
+          <select name="" id="" value="">
+            <option value="" selected disabled hidden>请选择</option>
+            <optgroup label="少年">
+              <option value="">1-6岁</option>
+              <option value="">7-12岁</option>
+            </optgroup>
+            <optgroup label="青年">
+              <option value="">13-15岁</option>
+              <option value="">16-18岁</option>
+            </optgroup>
+            <optgroup label="壮年">
+              <option value="">18-22岁</option>
+              <option value="">23-30岁</option>
+            </optgroup>
+            
+          </select>
           </select>
         </dd>
       <dt>生日</dt>
@@ -97,48 +111,63 @@
       <dt>生辰</dt>
         <dd><input type="time"></dd>
       <dt>照片</dt>
-        <dd><input type="file"></dd>
+        <dd><label>点我上传照片,我比文件上传按钮好看<input hidden type="file"></label></dd>
+        
       <dt>肤色</dt>
         <dd><input type="color"></dd>
       <dt>自我介绍</dt>
         <dd><textarea name="" id="" cols="30" rows="10" placeholder="&lt;textarea&gt;"></textarea></dd>
     </dl>
+    <fieldset disabled>
+      <legend>这里面全部禁用了</legend>
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </fieldset>
+    <input type="submit" value="提交">
+    <input type="reset" value="重置">
   </form>
   <hr>
   <table border="1">
-    <tr>
-      <th colspan="4">货品列表</th>
-    </tr>
-    <tr>
-      <td>编号</td>
-      <td>品名</td>
-      <td>进价</td>
-      <td>出价</td>
-    </tr>
-    <tr>
-      <td>001</td>
-      <td>苹果</td>
-      <td rowspan="2">5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td>001</td>
-      <td>桔子</td>
-     
-      <td>8</td>
-    </tr>
-    <tr>
-      <td>001</td>
-      <td>香蕉</td>
-      <td>5</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <td>001</td>
-      <td>山竹</td>
-      <td>5</td>
-      <td>8</td>
-    </tr>
+    <caption>货品列表</caption>
+    <col>
+    <col bgcolor="red">
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>品名</th>
+        <th>进价</th>
+        <th>出价</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>001</td>
+        <td>苹果</td>
+        <td rowspan="2">5</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>001</td>
+        <td>桔子</td>
+       
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>001</td>
+        <td>香蕉</td>
+        <td>5</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>001</td>
+        <td>山竹</td>
+        <td>5</td>
+        <td>8</td>
+      </tr>
+    </tbody>
+    
   </table>
   <hr>
   <img width="300" src="https://drscdn.500px.org/photo/174778125/m%3D1170_k%3D1/2841ccf2a3720e8e794a6a6930f6ff2c" usemap="#cat" alt="">
@@ -147,11 +176,13 @@
     <area shape="circle" coords="130, 260, 80" href="" alt="">
     <area shape="polygon" coords="55, 75, 20, 280, 170, 390, 230, 270, 195, 80, 130, 90, 55, 75" href="" alt="">
   </map>
-  <a name="bottom"></a>
+  
   <hr>
   <a href="">点击我会在下面的frame里打开小米商城,但为什么打不开呢?</a><br>
+  <iframe src="https://www.mi.com" frameborder="1"></iframe>
   <p>怎样&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这两个字之间空这么大呢?</p>
   <p>怎样在页面中显示下面的内容呢?<br>&lt;span&gt;&lt;/span&gt;</p>
+  <a name="bottom"></a>
 </body>
 
 </html>
