@@ -22,64 +22,61 @@
       .c > span{
         color: red;
       }
-      .c > span :nth-of-type(odd){
+      .c > span span:nth-child(1){
         color: green;
       }
-      .c > span :nth-of-type(even){
-        color:blue;
+      
+      .a.c + div a:visited {
+        color: orange;
       }
-      div > a:nth-of-type(-n+7){
-        color:yellow;
+      .a.c + div a:link {
+        color: pink;
       }
-      div > a:nth-of-type(-n+5){
-        color:blue;
+      .a.c + div a[href^="mailto:" i] {
+        color: blue;
       }
-      div > a:nth-of-type(3){
-        color:pink;
+      .a.c + div a[href^="tel:" i] {
+        color: yellow;
       }
-      div > a:nth-of-type(-n+2){
-        color:orange;
-      }
-      div > a:nth-of-type(n+8){
+      .a.c + div a[href$=".pdf" i] {
         font-size: 30px;
       }
-      .a ul li:nth-of-type(-n+7){
+      .a ul li:nth-child(-n + 7){
         color: red;
       }
-      .a ul li:nth-of-type(-n+3){
+      .a ul li:nth-child(-n + 3){
         color:#000;
       }
-      .b ul li{
-        color:blue;
-      }
-      .b ul li:nth-of-type(-n+34){
-        color:#000;
-      }
-      .b ul li:nth-of-type(n+51){
-        color:#000;
-      }
-      .b ul li:nth-of-type(-n+25){
+      
+      /* 让25及以内的元素为红色 */
+      .b ul li:nth-child(-n + 25){
         color:red;
       }
-      .b ul li:nth-of-type(n+65){
+      /* 让65及以上的元素为绿色 */
+      .b ul li:nth-child(n + 65){
         color:green;
       }
+      /* 让35-50的元素为蓝色 */
+      .b ul li:nth-child(n + 35):nth-child(-n + 50){
+        color:blue;
+      }
+      
       .prime ul li{
         color: green ;
       }
-      .prime ul li:nth-of-type(1){
+      .prime ul li:nth-child(1){
         color: #000;
       }
-      .prime ul li:nth-of-type(2n+4){
+      .prime ul li:nth-child(2n + 4){
         color:red;
       }
-      .prime ul li:nth-of-type(3n+6){
+      .prime ul li:nth-child(3n + 6){
         color:red;
       }
-      .prime ul li:nth-of-type(5n+10){
+      .prime ul li:nth-child(5n + 10){
         color:red;
       }
-      .prime ul li:nth-of-type(7n+14){
+      .prime ul li:nth-child(7n + 14){
         color:red;
       }
       
