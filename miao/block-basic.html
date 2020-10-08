@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      padding: 20px;
+    }
+    .header {
+      background-color: red;
+    }
+    .header p {
+      display: block;
+      width: 600px;
+      margin: 0 auto;
+      min-width: 600px;
+    }
+    .content {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 18px 10px;
+      border: 2px solid #000;
+    }
+    .content .p-top, .content .p-bottom {
+      display: block;
+      height: 70px;
+      overflow-y: scroll;
+    }
+    .content .center {
+      height: 50px;
+      background-color: #EE82EE;
+      margin: 20px 0;
+    }
+    .content .center:hover {
+      margin: 20px -10px;
+    }
+    .triangle {
+      width: 0px;
+      height: 0px;
+      border: 50px solid transparent;
+      border-bottom: 50px solid #FFA500;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <p>aaaaa</p>
+  </div>
+  <div class="content">
+    <p class="p-top">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, minima. Voluptas, tempore obcaecati. Numquam rerum, perferendis ipsum consequuntur non ipsa aut consectetur laborum dignissimos eius, aperiam et recusandae nisi. Neque.</p>
+    <section class="center"></section>
+    <p class="p-bottom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium minima numquam aspernatur tenetur eligendi? Tempore, officiis unde vero alias eveniet quibusdam nobis repellat amet consequatur eius nemo minus fuga quia!</p>
+    
+  </div>
+  <div class="triangle">
+
+  </div>
+</body>
+</html>
