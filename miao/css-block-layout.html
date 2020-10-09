@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style: none;
+    }
+    header {
+      background-color: black;
+      
+    }
+    header .hello {
+      color: #fff;
+      width: 600px;
+      margin: auto;
+    }
+    .content {
+      width: 600px;
+      margin: 0 auto;
+    }
+    .content .con-text {
+      margin: 16px 0;
+    }
+    .list-wrap li {
+      width: 180px;
+      height: 40px;
+      border: 3px solid #000;
+      background-color: #FFC0CB;
+      margin-top: 15px;
+      text-align: center;
+      line-height: 34px;
+    }
+    .list-wrap li:nth-child(n+5) {
+      margin-left: 210px;
+    }
+    .list-wrap li:nth-child(n+9) {
+      margin-left: 420px;
+    }
+    .list-wrap li:nth-child(5), .list-wrap li:nth-child(9) {
+      margin-top: -205px;
+    }
+
+    .list-wrap li:hover, .inline-block-wrap span:hover {
+      background-color: #FF0000;
+    }
+   
+    .inline-block-wrap {
+     font-size: 0;
+    }
+    .inline-block-wrap span {
+      font-size: 16px;
+      width: 180px;
+      height: 40px;
+      border: 3px solid #000;
+      display: inline-block;
+      background-color: #FFC0CB;
+      margin-top: 15px;
+      text-align: center;
+      line-height: 34px;
+    }
+    .inline-block-wrap span:nth-child(3n-1) {
+      margin-left: 30px;
+    }
+    .inline-block-wrap span:nth-child(3n) {
+      margin-left: 30px;
+    }
+
+
+    .link {
+      margin-top: 21px;
+      
+      
+    }
+    .link li {
+      margin-top: 1px;
+      padding-left: 1px;
+    }
+    .link li:nth-child(-n+4) {
+      border-bottom: 1px dotted #000;
+      
+    }
+
+    .bottom {
+      margin-top: 17px;
+      background-color: #EE8AEE;
+    }
+    .bottom p {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="hello">hello world 请调整浏览器窗口大小查看效果</p>
+  </header>
+  <div class="content">
+    <div class="con-text">
+      <p>页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px</p>
+    </div>
+    <ul class="list-wrap">
+      <li>宽180高40(包含边框)</li>
+      <li>水平间隙30px</li>
+      <li>垂直间隙15px</li>
+      <li>边框宽度3px</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+    </ul>
+
+    <!-- <p class="inline-block-wrap">
+      <span>宽180高40(包含边框)</span>
+      <span>水平间隙30px</span>
+      <span>垂直间隙15px</span>
+      <span>边框宽度3px</span>
+      <span>产品</span>
+      <span>产品</span>
+      <span>产品</span>
+      <span>产品</span>
+      <span>产品</span>
+      <span>产品</span>
+      <span>产品</span>
+      <span>产品</span>
+    </p> -->
+    
+    <ul class="link">
+      <li>link</li>
+      <li>link</li>
+      <li>link</li>
+      <li>link</li>
+      <li>link</li>
+    </ul>
+  </div>
+
+  <div class="bottom">
+    <p>©版权所有<br>本页所有布局均使用块元素</p>
+  </div>
+</body>
+</html>
