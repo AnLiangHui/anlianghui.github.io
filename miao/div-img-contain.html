@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .one {
+      border: 1px solid #000;
+      width: 800px;
+      height: 500px; 
+      text-align: center;
+      margin: auto;
+      font-size: 0;
+    }
+    .one em {
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+    .one img {
+      display: inline-block;
+      vertical-align: middle;
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .two {
+      border: 1px solid #000;
+      width: 800px;
+      height: 500px; 
+      margin: auto;
+      position: relative;
+      
+    }
+    .two img {
+      display: inline-block;
+      vertical-align: middle;
+      max-height: 100%;
+      max-width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>行内块元素：</h1>
+  <div class="one">
+    <em></em>
+    <img src="https://tse3-mm.cn.bing.net/th/id/OIP.H3hkPuclmV3CYUQIIErBgwHaFj?pid=Api&rs=1" alt="">
+  </div>
+  <div class="one">
+    <em></em>
+    <img src="https://images.pexels.com/photos/5326741/pexels-photo-5326741.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="">
+  </div>
+  <div class="one">
+    <em></em>
+    <img src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+  </div>
+  <h1>定位：</h1>
+  <div class="two">
+    <img src="https://tse3-mm.cn.bing.net/th/id/OIP.H3hkPuclmV3CYUQIIErBgwHaFj?pid=Api&rs=1" alt="">
+  </div>
+  <div class="two">
+    <img src="https://images.pexels.com/photos/5326741/pexels-photo-5326741.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="">
+  </div>
+  <div class="two">
+    <img src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+  </div>
+</body>
+</html>
