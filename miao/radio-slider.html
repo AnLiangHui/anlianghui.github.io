@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    * {
+      margin: 0;
+      font-size: 0;
+    }
+
+    section {
+      width: 300px;
+      height: 200px;
+      margin: 100px auto;
+    }
+
+    div {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    div img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transition: 2s;
+      opacity: 0;
+    }
+
+    input:nth-child(1):checked~div img:nth-child(1),
+    input:nth-child(2):checked~div img:nth-child(2),
+    input:nth-child(3):checked~div img:nth-child(3),
+    input:nth-child(4):checked~div img:nth-child(4),
+    input:nth-child(5):checked~div img:nth-child(5) {
+      opacity: 1;
+    }
+
+    input {
+      margin-left: 10px;
+      z-index: 100;
+      position: relative;
+      bottom: -190px;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <input type="radio" name="dot" checked>
+    <input type="radio" name="dot">
+    <input type="radio" name="dot">
+    <input type="radio" name="dot">
+    <input type="radio" name="dot">
+    <div>
+      <img src="https://tse4-mm.cn.bing.net/th/id/OIP.WFh0d8u5DudTf4_VZS_k2wHaEK?pid=Api&rs=1" alt="">
+      <img src="https://up.enterdesk.com/edpic/07/60/d7/0760d7871edee8e78e696aca9eed4bf2.jpg" alt="">
+      <img src="https://tse1-mm.cn.bing.net/th/id/OIP.5bpUKpEJT1RatSSe9ZDSvQHaEo?pid=Api&rs=1" alt="">
+      <img src="https://tse4-mm.cn.bing.net/th/id/OIP.2I3K-yEiIVdznhufHMUh5gHaEK?pid=Api&w=1920&h=1080&rs=1" alt="">
+      <img src="https://up.enterdesk.com/edpic/03/4d/08/034d08427399bb912b331e980b139ba0.jpg" alt="">
+    </div>
+    <label for=""></label>
+  </section>
+</body>
+
+</html>
