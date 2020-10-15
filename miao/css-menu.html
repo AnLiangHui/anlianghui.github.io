@@ -16,42 +16,35 @@
       height: 50px;
       width: 600px;
       margin: auto;
-    }
-    .nav-menu {
-      line-height: 50px;
-    }
-    .nav-menu > li {
-      width: calc(100% / 5);
-      display: inline-block;
       text-align: center;
-      vertical-align: top;
+    }
+    ul li {
+      position: relative;
+      display: inline-block;
+      padding: 15px 30px;
+      text-align: center;
       font-size: 16px;
-      box-shadow: 0 0 1px #000;
+      box-shadow: 0 0 1px red;
     }
-    
-    
-    .nav-menu > li > ul {
-      display: none;
-    }
-    .nav-menu > li:hover > ul {
+    li li {
       display: block;
     }
-    .nav-menu > li > ul li {
-      min-width: 100px;
-      position: relative;
-      font-size: 16px;
-      padding: 0 20px;
-      box-shadow: 0 0 1px #000;
+    ul ul {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      display: none;
     }
-
-    .nav-menu > li > ul > li ul {
+    li:hover > ul{
+      display: block;
+    }
+    ul ul ul {
       position: absolute;
       left: 100%;
       top: 0;
-      display: none;
     }
-    .nav-menu > li > ul li:hover > ul {
-      display: block;
+    li:hover {
+      background-color: pink;
     }
   </style>
 </head>
@@ -62,462 +55,64 @@
         <ul>
           <li>one
             <ul>
-              <li>oneaaaaaaaaaaaaaaaaaaaaa
-                <ul>
-                  <li>oneaaaaaaaaaaaaaaaaaaa</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
+              <li>one
                 <ul>
                   <li>one</li>
                   <li>two</li>
                 </ul>
               </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
+              <li>two </li>
+              <li>three</li>
             </ul>
           </li>
           <li>two
             <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
+              <li>one</li>
+              <li>two </li>
+              <li>three</li>
             </ul>
           </li>
           <li>three
             <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
+              <li>one</li>
+              <li>two </li>
+              <li>three</li>
             </ul>
           </li>
           <li>four
             <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
+              <li>one</li>
+              <li>two </li>
+              <li>three</li>
             </ul>
           </li>
         </ul>
       </li>
-      <li>主页
+      <li>文件
         <ul>
-          <li>one
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>two
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>three
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>four
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+          <li>one</li>
+          <li>two </li>
+          <li>three</li>
+          <li>four</li>
         </ul>
       </li>
-      <li>查看
+      <li>文件
         <ul>
-          <li>one
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>two
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>three
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>four
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+          <li>one</li>
+          <li>two </li>
+          <li>three</li>
+          <li>four</li>
         </ul>
       </li>
-      <li>编辑
+      <li>文件
         <ul>
-          <li>one
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>two
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>three
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>four
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+          <li>one</li>
+          <li>two </li>
+          <li>three</li>
+          <li>four</li>
         </ul>
       </li>
-      <li>打印
-        <ul>
-          <li>one
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>two
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>three
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>four
-            <ul>
-              <li>one
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>two
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-              <li>three
-                <ul>
-                  <li>one</li>
-                  <li>two</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
+     
       
     </ul>
   </nav>
