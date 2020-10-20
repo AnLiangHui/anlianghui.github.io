@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    input {
+      display: none;
+    }
+    label {
+      width: 110px;
+      height: 60px;
+      border: 2px solid #ccc;
+      display: block;
+      border-radius: 3em;
+      transition: .3s linear;
+      position: relative;
+    }
+    label span {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 1px 1px 5px grey ;
+      display: block;
+      transition: .3s ease-in;
+      background-color: #fff;
+      left: 3px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      
+      animation-duration: .3s;
+      animation-name: go-left;
+      animation-timing-function: ease-in;
+      animation-direction: reverse;
+    }
+    @keyframes go-right {
+      10% {
+        width: 60px;
+        border-radius: 3em;
+      }
+    }
+    @keyframes go-left {
+      10% {
+        width: 60px;
+        border-radius: 3em;
+      }
+    }
+    input:checked + label {
+      background-color: #30F34A;
+      border-color:  #30F34A;
+      border-width: 30px;
+    }
+    input:checked + label span {
+      animation-duration: .3s;
+      animation-name: go-right;
+      animation-timing-function: ease-in;
+      left: 25px;
+      transition: .3s ease-in;
+    }
+
+    
+    
+  </style>
+</head>
+<body>
+  <input type="checkbox" name="" id="switch">
+  <label for="switch"><span></span></label>
+</body>
+</html>
