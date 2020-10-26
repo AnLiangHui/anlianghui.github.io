@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @font-face {
+      font-family: 'font-an';
+      src: url('fontawesome-webfont.woff2');
+    }
+
+    .fa {
+      display: inline-block;
+      font-size: inherit;
+      font-family: font-an;
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    .fa-lg {
+      font-size: 1.5em;
+      line-height: 0.6666em;
+      vertical-align: -15%;
+    }
+
+    .fa-2x {
+      font-size: 2em;
+    }
+
+    .fa-3x {
+      font-size: 3em;
+    }
+
+    .fa-4x {
+      font-size: 4em;
+    }
+
+    .fa-5x {
+      font-size: 5em;
+    }
+
+    .fa-fw {
+      width: 2em;
+      text-align: center;
+    }
+
+    .fa-ul {
+      list-style: none;
+    }
+
+    .fa-li {
+      width: 1em;
+      margin-right: 1em;
+      text-align: center;
+    }
+
+
+
+
+
+
+
+    .list-group {
+      display: block;
+      line-height: 1.5;
+      width: 200px;
+    }
+
+    .list-group .list-group-item {
+      text-decoration: none;
+      color: grey;
+      border: 1px solid grey;
+      position: relative;
+      display: block;
+    }
+
+    .fa-stack {
+      position: relative;
+      display: inline-block;
+      width: 2em;
+      height: 2em;
+      line-height: 2em;
+      vertical-align: middle;
+    }
+
+    .fa-stack-1x,
+    .fa-stack-2x {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      line-height: inherit;
+    }
+    .fa-stack-2x {
+      font-size: 2em;
+    }
+
+    .fa-inverse {
+      color: #ffffff;
+    }
+
+
+
+
+
+
+
+    .fa-music:before {
+      content: "\f001";
+    }
+
+    .fa-search:before {
+      content: "\f002";
+    }
+
+    .fa-envelope-o:before {
+      content: "\f003";
+    }
+
+    .fa-heart:before {
+      content: "\f004";
+    }
+
+    .fa-star:before {
+      content: "\f005";
+    }
+
+    .fa-star-o:before {
+      content: "\f006";
+    }
+
+    .fa-user:before {
+      content: "\f007";
+    }
+
+    .fa-film:before {
+      content: "\f008";
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li><i class="fa fa-star fa-lg"></i>fa-lg</li>
+    <li><i class="fa fa-star fa-2x"></i>fa-2x</li>
+    <li><i class="fa fa-star fa-3x"></i>fa-3x</li>
+    <li><i class="fa fa-star fa-4x"></i>fa-4x</li>
+    <li><i class="fa fa-star fa-5x"></i>fa-5x</li>
+  </ul>
+
+  <div class="list-group">
+    <a class="list-group-item" href="#"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Home</a>
+    <a class="list-group-item" href="#"><i class="fa fa-film fa-fw" aria-hidden="true"></i>&nbsp; Library</a>
+    <a class="list-group-item" href="#"><i class="fa fa-music fa-fw" aria-hidden="true"></i>&nbsp; Applications</a>
+    <a class="list-group-item" href="#"><i class="fa fa-heart fa-fw" aria-hidden="true"></i>&nbsp; Settings</a>
+  </div>
+
+  <ul class="fa-ul">
+    <li><i class="fa-li fa fa-user"></i>List icons</li>
+    <li><i class="fa-li fa fa-film"></i>can be used</li>
+    <li><i class="fa-li fa fa-music"></i>as bullets</li>
+    <li><i class="fa-li fa fa-heart"></i>in lists</li>
+  </ul>
+
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-star fa-stack-2x"></i>
+    <i class="fa fa-heart fa-stack-1x fa-inverse"></i>
+  </span>
+  fa-twitter on fa-square-o<br>
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-film fa-stack-2x"></i>
+    <i class="fa fa-star fa-stack-1x "></i>
+  </span>
+  fa-flag on fa-circle<br>
+
+</body>
+
+</html>

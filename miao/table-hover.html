@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    
+    table {
+      border-collapse: collapse;
+      overflow: hidden;
+      margin: auto;
+    }
+    td {
+      position: relative;
+      border: 1px solid #000;
+    }
+    td:hover::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 9999999px;
+      background-color: red;
+      top: -9999px;
+      left: 0;
+      z-index: -100;
+    }
+    tr:hover {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tbody>
+    <tr>
+      <td>001</td>
+      <td>002</td>
+      <td>003</td>
+    </tr>
+    <tr>
+      <td>001</td>
+      <td>002</td>
+      <td>003</td>
+    </tr>
+    <tr>
+      <td>001</td>
+      <td>002</td>
+      <td>003</td>
+    </tr>
+    <tr>
+      <td>001</td>
+      <td>002</td>
+      <td>003</td>
+    </tr>
+    <tr>
+      <td>001</td>
+      <td>002</td>
+      <td>003</td>
+    </tr>
+    <tr>
+      <td>001</td>
+      <td>002</td>
+      <td>003</td>
+    </tr>
+    <tr>
+      <td>001</td>
+      <td>002</td>
+      <td>003</td>
+    </tr>
+    <tr>
+      <td>001</td>
+      <td>002</td>
+      <td>003</td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+</html>
