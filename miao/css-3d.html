@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css-3d</title>
+  <style>
+    @keyframes ulrotate {
+      from,to {
+        transform: rotatex(10deg) rotateY(10deg);
+      }
+      50% {
+        transform: rotatex(1000deg) rotateY(1000deg);
+      }
+    }
+    ul {
+      width: 100px;
+      height: 100px;
+      padding: 0;
+      list-style: none;
+      transform-style: preserve-3d;
+      margin:200px auto;
+      animation: ulrotate 10s linear infinite alternate-reverse;
+    }
+
+    li {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      opacity: .5;
+    }
+
+    li:nth-child(1) {
+      background-color: pink;
+      transform: translateZ(50px);
+    }
+
+    li:nth-child(2) {
+      background-color: orange;
+      transform: translateZ(-50px);
+
+    }
+
+    li:nth-child(3) {
+      background-color: blue;
+      transform: translateX(50px) rotateY(90deg);
+    }
+
+    li:nth-child(4) {
+      background-color: red;
+      transform: translateX(-50px) rotateY(90deg);
+
+    }
+
+    li:nth-child(5) {
+      background-color: green;
+      transform: translateY(50px) rotateX(90deg);
+    }
+
+    li:nth-child(6) {
+      background-color: purple;
+      transform: translateY(-50px) rotateX(90deg);
+    }
+
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</body>
+
+</html>
