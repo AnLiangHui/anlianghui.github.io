@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>marquee</title>
+  <style>
+    * {
+      background-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 1px red;
+    }
+
+    @keyframes marquees {
+      from {
+        margin-left: 100%;
+        transform: translate(0);
+      }
+
+      to {
+        margin-left: 0;
+        transform: translate(-100%);
+      }
+    }
+
+    div {
+      overflow: hidden;
+    }
+    span {
+      white-space: nowrap;
+      display: inline-block;
+      animation: marquees 10s linear infinite;
+    }
+  </style>
+</head>
+
+<body>
+  <div><span>aaa</span></div>
+</body>
+
+</html>
