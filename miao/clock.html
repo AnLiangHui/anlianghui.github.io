@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clock</title>
+
+  <style type="text/scss">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      xbox-shadow: 0 0 1px red inset;
+    }
+    
+    .clock-frame {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: linear-gradient(pink, skyblue);
+      position: relative;
+      .clock-dial {
+        width: 260px;
+        height: 260px;
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        ul {
+        list-style: none;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        border-radius: 50%;
+        li {
+            width: 1px;
+            height: 250px;
+            background-color: grey;
+            position: absolute;
+            top: 5px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            &:nth-child(5n + 1) {
+              width: 4px;
+              background-color: #000;
+            }
+            &:nth-child(2) {
+              transform: rotate(calc(6deg * 1));
+            }
+
+            &:nth-child(3) {
+              transform: rotate(calc(6deg * 2));
+            }
+
+            &:nth-child(4) {
+              transform: rotate(calc(6deg * 3));
+            }
+
+            &:nth-child(5) {
+              transform: rotate(calc(6deg * 4));
+            }
+
+            &:nth-child(6) {
+              transform: rotate(calc(6deg * 5));
+            }
+
+            &:nth-child(7) {
+              transform: rotate(calc(6deg * 6));
+            }
+
+            &:nth-child(8) {
+              transform: rotate(calc(6deg * 7));
+            }
+
+            &:nth-child(9) {
+              transform: rotate(calc(6deg * 8));
+            }
+
+            &:nth-child(10) {
+              transform: rotate(calc(6deg * 9));
+            }
+
+            &:nth-child(11) {
+              transform: rotate(calc(6deg * 10));
+            }
+
+            &:nth-child(12) {
+              transform: rotate(calc(6deg * 11));
+            }
+
+            &:nth-child(13) {
+              transform: rotate(calc(6deg * 12));
+            }
+
+            &:nth-child(14) {
+              transform: rotate(calc(6deg * 13));
+            }
+
+            &:nth-child(15) {
+              transform: rotate(calc(6deg * 14));
+            }
+
+            &:nth-child(16) {
+              transform: rotate(calc(6deg * 15));
+            }
+
+            &:nth-child(17) {
+              transform: rotate(calc(6deg * 16));
+            }
+
+            &:nth-child(18) {
+              transform: rotate(calc(6deg * 17));
+            }
+
+            &:nth-child(19) {
+              transform: rotate(calc(6deg * 18));
+            }
+
+            &:nth-child(20) {
+              transform: rotate(calc(6deg * 19));
+            }
+
+            &:nth-child(21) {
+              transform: rotate(calc(6deg * 20));
+            }
+
+            &:nth-child(22) {
+              transform: rotate(calc(6deg * 21));
+            }
+
+            &:nth-child(23) {
+              transform: rotate(calc(6deg * 22));
+            }
+
+            &:nth-child(24) {
+              transform: rotate(calc(6deg * 23));
+            }
+
+            &:nth-child(25) {
+              transform: rotate(calc(6deg * 24));
+            }
+
+            &:nth-child(26) {
+              transform: rotate(calc(6deg * 25));
+            }
+
+            &:nth-child(27) {
+              transform: rotate(calc(6deg * 26));
+            }
+
+            &:nth-child(28) {
+              transform: rotate(calc(6deg * 27));
+            }
+
+            &:nth-child(29) {
+              transform: rotate(calc(6deg * 28));
+            }
+
+            &:nth-child(30) {
+              transform: rotate(calc(6deg * 29));
+            }
+        }
+        }
+        .clock-cover {
+          width: 230px;
+          height: 230px;
+          border-radius: 50%;
+          background-color: #fff;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+        .clock-axle-center {
+          width: 18px;
+          height: 18px;
+          border: 1px solid grey;
+          background-color: #fff;
+          border-radius: 50%;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 10;
+        }
+        .hour-hand {
+          width: 6px;
+          height: 50px;
+          background-color: #000;
+          animation: rotation 43200s linear infinite;
+        }
+        .minute-hand {
+          width: 6px;
+          height: 100px;
+          background-color: #000;
+          animation: rotation 3600s linear infinite;
+        }
+        .second-hand {
+            animation: rotation 60s steps(60) infinite;
+          .gitter {
+            width: 4px;
+            height: 100px;
+            background-color: aqua;
+            animation: git 1s infinite;
+          }
+        }
+        .second-hand, .minute-hand, .hour-hand {
+          border-radius: 1em;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+        }
+      }
+    }
+    @keyframes rotation {
+      from {
+        transform-origin: bottom center;
+        transform:  translate(-50%, -100%) rotate(0deg) ;
+      }
+      to {
+        transform-origin: bottom center;
+        transform:  translate(-50%, -100%) rotate(360deg) ;
+      }
+    }
+    @keyframes git {
+      from, to {
+        transform-origin: bottom center;
+        transform: rotate(0deg) ;
+      }
+      10% {
+        transform-origin: bottom center;
+        transform: rotate(-1deg) ;
+      }
+      20% {
+        transform-origin: bottom center;
+        transform: rotate(0deg) ;
+      }
+      
+    }
+  </style>
+  <script src="sass.js"></script>
+</head>
+<body>
+  <div class="clock-frame">
+    <div class="clock-dial">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div class="clock-cover">
+      </div>
+      <div class="clock-axle-center">
+      </div>
+      <div class="hour-hand"></div>
+      <div class="minute-hand"></div>
+      <div class="second-hand">
+        <div class="gitter">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
