@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="400" height="300"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated'
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = x | 0
+    y = y | 0
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+
+  function line(x1, y1, x2, y2) {
+    ctx.strokeStyle = 'black'
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
+    ctx.stroke()
+  }
+  /**
+   * YOUR TASK
+画图的题：
+画一条实线
+画一条一个实点一个空点的虚线
+画一条两个实点两个空点的虚线
+画一条三个实点两个空点的虚线
+画一条45度的斜线
+画一条30度的斜线（选做）
+在四个角画分别画一条45度的斜线以让画面看起来像一个相框
+画一条跨越画布左上角和右下角的对角线
+画一个空心矩形
+画一个实心矩形
+画一个rgb色彩空间的某一面
+画一个空心的圆
+画一个实心的圆
+画一个大小合适的sin(x)的图像
+   */
+</script>
+<script>
+  // YOUR CODE GOES BELOW
+  for (var i = 0; i < 200; i ++) {
+    dot(i, 10, 'green');
+  }
+  for (var i = 0; i < 200; i += 2) {
+    dot(i, 20, 'blue');
+  }
+  for (var i = 0; i < 200; i += 4) {
+    dot(i, 30, 'blue');
+    dot(i + 1, 30, 'blue');
+  }
+  for (var i = 0; i < 200; i += 5) {
+    dot(i, 40, 'blue');
+    dot(i + 1, 40, 'blue');
+    dot(i + 2, 40, 'blue');
+  }
+  for (var i = 0; i <= 100; i ++) {
+    dot(i, 50 + i, 'red');
+  }
+  y30 = 60;
+  for (var i = 0; i <= 100; i ++) {
+    dot(i, y30 += (300 / Math.sqrt(3) / 100), 'red');
+  }
+  for (var i = 15; i <= 385; i ++) {
+    dot(i, 15, 'black');
+  }
+  for (var i = 15; i <= 385; i ++) {
+    dot(i, 285, 'black');
+  }
+  for (var i = 15; i <= 285; i ++) {
+    dot(15, i, 'black');
+  }
+  for (var i = 15; i <= 285; i ++) {
+    dot(385, i, 'black');
+  }
+
+  var y1 = 16;
+  for (var i = 40; i > 15; i --) {
+    dot(i,  y1 ++, 'aqua');
+  }
+  var y2 = 16;
+  for (var i = 360; i < 385; i ++) {
+    dot(i,  y2 ++, 'aqua');
+  }
+  var y2 = 284;
+  for (var i = 40; i > 15; i --) {
+    dot(i,  y2 --, 'aqua');
+  }
+  var y2 = 284;
+  for (var i = 360; i < 385; i ++) {
+    dot(i,  y2 --, 'aqua');
+  }
+  var y3 = 15;
+  for (var i = 15; i < 385; i ++) {
+    dot(i,  y3 = y3 + 270 / 370, 'aqua');
+  }
+  
+  for (var i = 200; i <= 250; i ++) {
+    dot(i, 20, 'black');
+  }
+  for (var i = 200; i <= 250; i ++) {
+    dot(i, 40, 'black');
+  }
+  for (var i = 20; i <= 40; i ++) {
+    dot(200, i, 'black');
+  }
+  for (var i = 20; i <= 40; i ++) {
+    dot(250, i, 'black');
+  }
+  for (var i = 280; i <= 330; i ++) {
+    for (var j = 20; j <= 40; j ++) {
+      dot(i, j, 'black');
+    }
+  }
+  var g = 255;
+  for (var i = 180; i <= 265; i ++) {
+    for (var j = 50; j <= 135; j ++) {
+    dot(i, j, 'rgba(255,0,' + (g = g - 3) + ',.7)');
+    }
+    g = 255;
+  }
+  
+  for (var j = 50; j <= 135; j ++) {
+    dot(265, j, 'rgba(255,255,' + (g = g - 3) + ',.7)');
+  }
+  for (var j = 180; j <= 265; j ++) {
+    dot(j, 50, 'rgba(255,' + (g = g + 3) + ',255,.7)');
+  }
+  for (var j = 180; j <= 265; j ++) {
+    dot(j, 135, 'rgba(255,' + (g = g + 3) + ',0,.7)');
+  }
+
+
+  
+  var x = 0;
+  for (var i = 180; i <= 210; i ++) {
+    x = i-180
+    for (var j = 180; j <= 210 - (i - 180); j ++) {
+      dot(i, j, 'black');
+    }
+  }
+</script>
+</html>
