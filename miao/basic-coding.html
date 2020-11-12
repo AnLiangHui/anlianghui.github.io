@@ -743,26 +743,33 @@
     }
   }
 </script> 
-<script type="norun" id="ch0105/22">
+<script xtype="norun" id="ch0105/22">
   var mother = 0;
   var my = 0;
-  var sum = 0;
+  var stop = 0;
   for (var i = 0; i < 12; i ++) {
     var a = Number(prompt('a'+(i + 1)));
-    // if (a >= 0 && a < 350) {
-    //   if ((my + 300 - a) % 100 == 0) {
-    //     mother += my + 300 - a;
-    //     my = (my + 300 - a) % 100;
-    //   }else {
-    //     mother += parseInt((my + 300 - a) / 100) * 100;
-    //     my = (my + 300 - a) % 100;
-    //   }
-    // }
-    sum += 300 - a;
+    if (a >= 0 && a < 350) {
+      if((my + 300 - a) < 0) {
+        stop = -(i + 1);
+        break;
+      }
+      if ((my + 300 - a) % 100 == 0) {
+        mother += my + 300 - a;
+        my = (my + 300 - a) % 100;
+      }else {
+        mother += parseInt((my + 300 - a) / 100) * 100;
+        my = (my + 300 - a) % 100;
+      }
+      
+    }
   }
-  mother = parseInt(sum / 100) * 100;
-  my = sum - mother;
-  console.log(mother * 1.2 + my);
+  if(stop != 0) {
+    console.log(stop);
+  }else {
+    console.log(mother * 1.2 + my);
+  }
+  
 </script> 
  
 
