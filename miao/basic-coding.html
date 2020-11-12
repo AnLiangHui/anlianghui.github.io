@@ -743,7 +743,7 @@
     }
   }
 </script> 
-<script xtype="norun" id="ch0105/22">
+<script type="norun" id="ch0105/22">
   var mother = 0;
   var my = 0;
   var stop = 0;
@@ -761,7 +761,6 @@
         mother += parseInt((my + 300 - a) / 100) * 100;
         my = (my + 300 - a) % 100;
       }
-      
     }
   }
   if(stop != 0) {
@@ -769,9 +768,81 @@
   }else {
     console.log(mother * 1.2 + my);
   }
-  
 </script> 
- 
+<script type="norun" id="ch0105/23">
+  var m = Number(prompt('m'));
+  var n = Number(prompt('n'));
+  var count = 0;
+  for (var i = 0; i < n; i ++) {
+    var a = Number(prompt('a'+(i + 1)));
+    if (m >= a) {
+      m -= a;
+    }else {
+      count += 1;
+    }
+  }
+  console.log(count);
+</script> 
+<script type="norun" id="ch0105/24">
+  var n = Number(prompt('n'));
+  var count = 0;
+  var long = 0;
+  for (var i = 0; i < n; i ++) {
+    var a = Number(prompt('a'+(i + 1)));
+    var b = Number(prompt('b'+(i + 1)));
+    if (a >= 90 && a <=140 && b >=60 && b <= 90) {
+      count += 1;
+      long = count;
+    }else {
+      count = 0;
+    }
+  }
+  console.log(long);
+</script> 
+<script type="norun" id="ch0105/25">
+  for (var i = 1; i; i ++) {
+    i7 = i.toString(7);
+    i9 = i.toString(9);
+    i7ge = i7 % 10;
+    i7shi = (i7 - i7ge) % 100 / 10;
+    i7bai = (i7 - i7 % 100) / 100;
+    if (i7 >= 100 && i7 <= 999 && i9 >= 100 && i9 <= 999) {
+      if (('' +i7ge + i7shi + i7bai) == i9) {
+        console.log(i);
+        console.log(i7);
+        console.log(i9);
+        break;
+      }
+    }
+  }
+</script> 
+<script type="norun" id="ch0105/26">
+  var n = Number(prompt('n'));
+  var count = 0;
+  for (var i = 0; i < n; i ++) {
+    var a = Number(prompt('a'+(i + 1)));
+    ge = a % 10;
+    shi = (a - ge) % 100 / 10;
+    bai = (a % 1000 - a % 100) / 100;
+    qian = (a - a % 1000) / 1000;
+    if ((ge - qian - bai - shi) > 0) {
+      count += 1;
+    }
+  }
+  console.log(count); 
+</script> 
+<script type="norun" id="ch0105/27">
+  var k = Number(prompt('k'));
+  var count = 0;
+  var sum = 0
+  for (var i = 1; i ; i ++) {
+    sum += 1 / i;
+    if (sum > k) {
+      console.log(i);
+      break;
+    }
+  }
+</script> 
 
 
 
