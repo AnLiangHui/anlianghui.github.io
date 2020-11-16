@@ -1172,6 +1172,27 @@
  
 </script>
 
+<script type="norun" id="7">
+  var seven = function (n) {
+    for (var i = 1; i <= n; i ++) {
+      var flag = true;
+      var i1 = i;
+      if (i % 7 != 0) {
+        do {
+          digit = i1 % 10;
+          if (digit == 7) {
+            flag = false;
+            break;
+          }
+          i1 = (i1 - digit) / 10;
+        }while (i1 > 0)
+        if (flag == true) {
+          return i;
+        }
+      }
+    }
+  }
+</script>
 <script type="norun" id="sqrt">
   var sqrt = function (n) {
     return Math.sqrt(n);
@@ -1196,7 +1217,7 @@
 </script>
 <script type="norun" id="narcissistics">
   var narcissistics = function () {
-    for (var i = 0; i <= 10000; i ++) {
+    for (var i = 100; i <= 10000; i ++) {
       var sum = 0;
       var i1 = i;
       do {
@@ -1283,6 +1304,7 @@
       }
     }
   }
+  primes();
 </script>
 <script type="norun" id="lcf">
   var lcf = function (x, y) {
