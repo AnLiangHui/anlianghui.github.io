@@ -826,7 +826,7 @@
     var c9 = (i - a9 - b9 * 9) / 9 / 9 % 9;
 
     if (a7 == c9 && b7 == b9 && c7 == a9) {
-      console.log(i,''+a7+b7+c7,''+a9+b9+c9);
+      console.log(i, '' + a7 + b7 + c7, '' + a9 + b9 + c9);
       break;
     }
   }
@@ -932,42 +932,20 @@
 <script type="norun" id="ch0105/31">
   var n = Number(prompt('n'));
   var m = Number(prompt('m'));
-  var sum = n;
-  for (var i = 1; i <= m; i ++){
-    if (i == 1) {
-      sum = 0;
-    }else if (i % 2 == 0) {
-      sum += 1;
-    }else {
-      sum -= 1;
+  var result = '';
+  for (var i = 1; i <= n; i ++) {
+    var flag = true;
+    for (var j = 1; j <= m; j ++) {
+      if (i % j) {
+        flag = !flag;
+      }
+    }
+    if (!flag) {
+      result += i + ',';
     }
   }
-  console.log(sum);
-  // for (var j = 1; j <= m; j ++) {
-  //   if (j == 1) {
-  //     for (var i = 1; i <= n; i ++){
-  //       ('flag' + i) = false;
-  //     }
-  //   }
-  //   else if (j % 2 == 0) {
-  //     for (var i = 1; i <= n; i ++){
-  //       if (i % j == 0) {
-  //         ('flag' + i) = true;
-  //       }
-  //     }
-  //   }else {
-  //     for (var i = 1; i <= n; i ++){
-  //       if (i % j == 0) {
-  //         ('flag' + i) = false;
-  //       }
-  //     }
-  //   }
-  // }
-  // for (var i = 1; i <= n; i ++){
-  //   if(('flag' + i)) {
-  //     console.log(i);
-  //   }
-  // }
+  console.log(result.slice(0, -1));
+  
 </script>
 <script type="norun" id="ch0105/32">
   var n = Number(prompt('n'));
@@ -1029,17 +1007,33 @@
   var X = Number(prompt('X'));
   var t = 0;
   var n = 0;
-  if (t == M) {
-    M / N
-  }
   for (var i = 0; i < X ; i ++){
     t += N;
     if (t >= M) {
       t = M;
       n = N;
-      N += parseInt(M / n);
+      N += Math.floor(M / n);
       t = 0;
     }
+  }
+  console.log(N);
+</script>
+<script type="norun" id="ch0105/38">
+  var m = Number(prompt('m'));
+  for (var i = 0; i < m ; i ++){
+    var n = Number(prompt('n'));
+    if (n == 0) {
+      var c = Number(prompt('c')); 
+      console.log(0);
+    }else {
+      for (var j = n; j >= 0; j --) {
+        var c = Number(prompt('c'));
+        if (j) {
+          console.log(c * j);
+        }
+      }
+    }
+    
   }
   console.log(N);
 </script>
@@ -1056,11 +1050,21 @@
 <script type="norun" id="ch0105/40">
   var n = Number(prompt('n'));
   var count = 0;
-  for (var i = 1; i <= n ; i ++){
-    for (var j = 0; j < i.toString().length; j ++) {
-      if (i.toString().charAt(j) == 1) {
+  // for (var i = 1; i <= n; i ++){
+  //   for (var j = 0; j < i.toString().length; j ++) {
+  //     if (i.toString().charAt(j) == 1) {
+  //       count ++;
+  //     }
+  //   }
+  // }
+  for (var i = 1; i <= n; i ++) {
+    var m = i;
+    while (m > 0) {
+      var dight = m % 10;
+      if (dight === 1) {
         count ++;
       }
+      m = (m - dight) / 10;
     }
   }
   console.log(count);
@@ -1069,11 +1073,21 @@
   var L = Number(prompt('L'));
   var R = Number(prompt('R'));
   var count = 0;
+  // for (var i = L; i <= R ; i ++){
+  //   for (var j = 0; j < i.toString().length; j ++) {
+  //     if (i.toString().charAt(j) == 2) {
+  //       count ++;
+  //     }
+  //   }
+  // }
   for (var i = L; i <= R ; i ++){
-    for (var j = 0; j < i.toString().length; j ++) {
-      if (i.toString().charAt(j) == 2) {
+    var m = i;
+    while (m > 0) {
+      var dight = m % 10;
+      if (dight === 2) {
         count ++;
       }
+      m = (m - dight) / 10;
     }
   }
   console.log(count);
@@ -1083,8 +1097,9 @@
   var w = Number(prompt('w'));
   var x = prompt('x');
   var y = Number(prompt('y'));
-  sum = '';
+  
   for(var i = 0; i < h; i ++) {
+    var sum = '';
     if (y == 1 || i == 0 || i == h - 1) {
       for (var j = 0; j < w ; j ++){
         sum += x;
@@ -1099,7 +1114,6 @@
       }
     }
     console.log(sum);
-    sum = '';
   }
 </script>
 <script type="norun" id="ch0105/43">
@@ -1111,7 +1125,7 @@
           if (i > j) {
             console.log(i);
           }else {
-            console.log(k);
+            console.log(j);
           }
         }
       }
