@@ -1172,6 +1172,153 @@
  
 </script>
 
+<script type="norun" id="sqrt">
+  var sqrt = function (n) {
+    return Math.sqrt(n);
+  }
+</script>
+<script type="norun" id="narcissistic">
+  var narcissistic = function (n) {
+    var sum = 0;
+    var n1 = n;
+    do {
+      digit = n % 10;
+      sum += digit * digit * digit;
+      n = (n - digit) / 10;
+    }while (n > 0)
+    n = n;
+    if (sum == n1) {
+      console.log('true');
+    }else {
+      console.log('false');
+    }
+  }
+</script>
+<script type="norun" id="narcissistics">
+  var narcissistics = function () {
+    for (var i = 0; i <= 10000; i ++) {
+      var sum = 0;
+      var i1 = i;
+      do {
+        digit = i1 % 10;
+        sum += digit * digit * digit;
+        i1 = (i1 - digit) / 10;
+      }while (i1 > 0)
+      if (sum == i) {
+        console.log(i);
+      }
+    }
+  }
+  narcissistics();
+</script>
+<script type="norun" id="palindrom">
+  var palindrom = function (n) {
+    var result = 1;
+    for (var i = 1; i <= n; i ++) {
+      result *= i;
+    }
+    return result;
+  }
+</script>
+<script type="norun" id="weekday">
+  var weekday = function (y, m) {
+    
+  }
+</script>
+<script type="norun" id="complete-number">
+  var completeNumber = function (n) {
+    var sum = 0;
+    for (var i = 1; i <= n / 2; i ++) {
+      if (n % i == 0) {
+        sum += i;
+      }
+    }
+    if (sum == n) {
+      return true;
+    }else {
+      return false;
+    }
+    
+  }
+</script>
+<script type="norun" id="complete-numbers">
+  var completeNumbers = function () {
+    var n = 1000;
+    for (var i = 1; i <= n; i ++) {
+      var sum = 0;
+      for (var j = 1; j < i; j ++) {
+        if (i % j == 0) {
+          sum += j;
+        }
+      }
+      if (sum == i) {
+        console.log(i);
+      }
+    }
+  }
+  completeNumbers();
+</script>
+<script type="norun" id="prime">
+  var prime = function (n) {
+    for (var i = 2; i < n; i ++) {
+      if (n % i == 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+</script>
+<script type="norun" id="primes">
+  var primes = function () {
+    var n = 1000;
+    for (var i = 2; i <= n; i ++) {
+      var flag = true;
+      for (var j = 2; j < i; j ++) {
+        if (i % j == 0) {
+          flag = false;
+        }
+      }
+      if (flag == true) {
+        console.log(i);
+      }
+    }
+  }
+</script>
+<script type="norun" id="lcf">
+  var lcf = function (x, y) {
+    for (var i = 1; i <= x; i ++) {
+      if (x % i == 0) {
+        for (var j = 0; j <= y; j ++) {
+          if (y % j == 0) {
+            if (i == j) {
+              max = i;
+            }
+          }
+        }
+      }
+    }
+    return max;
+  }
+</script>
+<script type="norun" id="lcm">
+  var lcm = function (x, y) {
+    var result = 0;
+    var flag = false;
+    for (var i = 1; i; i ++) {
+      result = x * i;
+      for (var j = 1; j <= x; j ++) {
+        if (result == y * j) {
+          return result;
+          flag = true;
+          break;
+        }
+      }
+      if (flag == true){
+        break;
+      }
+    }
+  }
+</script>
 
 
 
