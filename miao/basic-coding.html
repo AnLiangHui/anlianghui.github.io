@@ -1194,38 +1194,69 @@
   }
 </script>
 <script type="norun" id="sqrt">
-  var sqrt = function (n) {
-    return Math.sqrt(n);
+  function sqrt(n) {
+    //  var l = 0;
+    //  var r = n;
+    //  while (r - l > 0.000001) {
+    //   var m = (l + r) / 2;
+    //   if (m * m == n) {
+    //     return m;
+    //   }
+    //   else if (m * m < n) {
+    //     l = m;
+    //   }
+    //   else if (m * m > n) {
+    //     r = m;
+    //   }
+    //  }
+    //  return (l + r) / 2
+    var x = n;
+    while (Math.abs(x * x - n) > 0.00000000001) {
+      x = (x + n / x) / 2;
+    }
+    return x;
+  }
+</script>
+<script>
+  var digitWidth = function(n) {
+    var width = 0;
+    do {
+        var digit = n % 10;
+        n = (n - digit) / 10;
+        width ++;
+    }while (n > 0)
+    return width;
+  }
+  var power = function(x, y) {
+    var exp = 1;
+    for (i = 0; i < y; i ++) {
+      exp *= x;
+    }
+    return exp;
   }
 </script>
 <script type="norun" id="narcissistic">
   var narcissistic = function (n) {
-    var sum = 0;
     var n1 = n;
+    var width = digitWidth(n);
+    var sum = 0;
     do {
-      digit = n % 10;
-      sum += digit * digit * digit;
-      n = (n - digit) / 10;
-    }while (n > 0)
-    n = n;
-    if (sum == n1) {
-      console.log('true');
+      var digit = n1 % 10;
+      sum += power(digit, width);
+      n1 = (n1 - digit) / 10;
+    }while (n1 > 0)
+    if (sum == n) {
+      return true;
     }else {
-      console.log('false');
+      return false;
     }
   }
+  
 </script>
 <script type="norun" id="narcissistics">
   var narcissistics = function () {
     for (var i = 100; i <= 10000; i ++) {
-      var sum = 0;
-      var i1 = i;
-      do {
-        digit = i1 % 10;
-        sum += digit * digit * digit;
-        i1 = (i1 - digit) / 10;
-      }while (i1 > 0)
-      if (sum == i) {
+      if(narcissistic(i)) {
         console.log(i);
       }
     }
@@ -1235,7 +1266,7 @@
 <script type="norun" id="palindrom">
   var palindrom = function (n) {
     var result = 1;
-    for (var i = 1; i <= n; i ++) {
+    for (var i = 2; i <= n; i ++) {
       result *= i;
     }
     return result;
@@ -1264,15 +1295,8 @@
 </script>
 <script type="norun" id="complete-numbers">
   var completeNumbers = function () {
-    var n = 1000;
-    for (var i = 1; i <= n; i ++) {
-      var sum = 0;
-      for (var j = 1; j < i; j ++) {
-        if (i % j == 0) {
-          sum += j;
-        }
-      }
-      if (sum == i) {
+    for (var i = 1; i <= 1000; i ++) {
+      if (completeNumber(i)) {
         console.log(i);
       }
     }
@@ -1284,6 +1308,7 @@
     for (var i = 2; i < n; i ++) {
       if (n % i == 0) {
         return false;
+        break;
       }
     }
     return true;
@@ -1308,6 +1333,7 @@
 </script>
 <script type="norun" id="lcf&lcm">
   var lcf = function (x, y) {
+    var max = 0;
     for (var i = 1; i <= x; i ++) {
       if (x % i == 0) {
         for (var j = 0; j <= y; j ++) {
@@ -1339,8 +1365,30 @@
     }
   }
 </script>
-<script type="norun" id="lcm">
-
+<script type="norun" id="lcf">
+  function lcf(x, y) {
+    while (x > y) {
+      x = x - y;
+      if(x == y) {
+        console.log(x);
+        break;
+      }
+    }
+    while (x < y) {
+      y = y - x;
+      if(x == y) {
+        console.log(x);
+        break;
+      }
+      while (x > y) {
+      x = x - y;
+      if(x == y) {
+        console.log(x);
+        break;
+      }
+    }
+    }
+  }
 </script>
 
 
