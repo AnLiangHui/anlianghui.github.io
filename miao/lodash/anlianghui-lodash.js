@@ -19,5 +19,17 @@ var anlianghui = function () {
     }
     return res;
   }
-  return chunk;
+  function compact(arr) {
+    var res = [];
+    for (var v of arr) {
+      if (v) {
+        res.push(v);
+      }
+    }
+    return res;
+  }
+  return {
+    chunk,
+    compact,
+  };
 }()
