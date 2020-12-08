@@ -17,11 +17,7 @@ var anlianghui = function () {
         c = 0;
       }
     }
+    return res;
   }
-  function compact(arr) {
-
-  }
-  return {
-    chunk,
-  }
+  return chunk;
 }()
