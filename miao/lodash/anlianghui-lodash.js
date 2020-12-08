@@ -38,10 +38,11 @@ var anlianghui = function () {
     }
     return arr;
   }
-  function difference(arr, fv) {
+  function difference(arr, ...fv) {
     var res = [];
+    var c = concat(...fv)
     for (var v of arr) {
-      if (fv.indexOf(v) == -1) {
+      if (c.indexOf(v) == -1) {
         res.push(v);
       }
     }
@@ -53,7 +54,8 @@ var anlianghui = function () {
       if (i == 0) {
         res += arr[i];
       }else {
-        res += str + arr[i]
+        res += str;
+        res += arr[i];
       }
     }
     return res;
@@ -87,19 +89,40 @@ var anlianghui = function () {
     }
     return arr;
   }
-  function isSame(obj, func) {
-    for (var i in func) {
-      if(obj[i] != func[i]) return false;
+  function isSame(func) {
+    if (Array.isArray(func)) {
+      return function (o) {
+        for (var i = 0; i < func.length; i += 2) {
+          if (o[func[i]] != func[i + 1]) {
+            return false;
+          }
+        }
+        return true;
+      }
     }
-    return true;
+    if (typeof func == 'object') {
+      return function (o) {
+        for (var i in o) {
+          if(o[i] != func[i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+    if (typeof func == 'function') {
+      return func;
+    }
+    if (typeof func == 'string') {
+      return function(o) {
+        return o[func];
+      }
+    }
   }
   function findIndex(arr, func, idx = 0) {
+    func = isSame(func);
     for (var i = idx; i < arr.length; i ++) {
-      if(typeof func == "function") {
-        if(func(arr[i])) return i;
-      } else {
-        if(isSame(arr[i], func)) return i;
-      }
+      if(func(arr[i])) return i;
     }
     return -1;
   }
@@ -161,7 +184,7 @@ var anlianghui = function () {
   }
   function sortedIndex(arr, val) {
     for (var i = 0; i < arr.length; i ++) {
-      if (val < arr[i]) {
+      if (val <= arr[i]) {
         return i;
       }
     }
