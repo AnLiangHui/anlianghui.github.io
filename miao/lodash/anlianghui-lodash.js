@@ -48,6 +48,15 @@ var anlianghui = function () {
     }
     return res;
   }
+  function differenceWith(arr, val, func) {
+    let res = [];
+    for (let i = 0; i < arr.length; i ++) {
+      for (let j = 0; j < val.length; j ++) {
+        if (!func(arr[i], val[j])) res.push(arr[i]);
+      }
+    }
+    return res;
+  }
   function join(arr, str) {
     var res = '';
     for (var i in arr) {
@@ -82,6 +91,17 @@ var anlianghui = function () {
     if (n > arr.length) return [];
     arr.length = arr.length - n;
     return arr;
+  }
+  function dropRightWhile(arr, func) {
+    let res = [];
+    func = isSame(func);
+    for (let i = 0; i < arr.length; i ++) {
+      res.push(arr[i].user);
+      if (!func(arr[i])) {
+        break;
+      }
+    }
+    return res;
   }
   function fill(arr, val, start = 0, end = arr.length) {
     for (var i = start; i < end; i ++) {
@@ -126,6 +146,13 @@ var anlianghui = function () {
     }
     return -1;
   }
+  function findLastIndex(arr, func, idx = 0) {
+    func = isSame(func);
+    for (var i = arr.length - 1; i >= idx; i --) {
+      if(func(arr[i])) return i;
+    }
+    return -1;
+  }
   function flatten(arr) {
     var res = [];
     for (var i = 0; i < arr.length; i ++) {
@@ -147,6 +174,13 @@ var anlianghui = function () {
       }
     }
     return res;
+  }
+  function flattenDepth(arr, depth = 1) {
+    while (depth) {
+      arr = flatten(arr);
+      depth --
+    }
+    return arr;
   }
   function fromPairs(arr) {
     var map = {};
@@ -220,6 +254,43 @@ var anlianghui = function () {
     }
     return res;
   }
+  function intersection(start, ...arr) {
+    let res = [];
+    for (let i of start) {
+      let flag = true;
+      for (let a of arr) {
+        if (!a.includes(i)) {
+          flag = false;
+          break;
+        }
+      }
+      flag && res.push(i);
+    }
+    return res;
+  }
+  function nth(arr, n = 0) {
+    if (n < 0) n = arr.length + n;
+    return arr[n]
+  }
+  function pull(arr, ...vals) {
+    let res = [];
+    for (let v of arr) {
+      if (!vals.includes(v)) {
+        res.push(v);
+      }
+    }
+    return res;
+  }
+  function pullAll(arr, vals) {
+    let res = [];
+    for (let v of arr) {
+      if (!vals.includes(v)) {
+        res.push(v);
+      }
+    }
+    return res;
+  }
+  
   return {
     chunk,
     compact,
@@ -230,10 +301,13 @@ var anlianghui = function () {
     lastIndexOf,
     drop,
     dropRight,
+    dropRightWhile,
     fill,
     findIndex,
+    findLastIndex,
     flatten,
     flattenDeep,
+    flattenDepth,
     fromPairs,
     head,
     indexOf,
@@ -245,5 +319,10 @@ var anlianghui = function () {
     max,
     min,
     sum,
+    differenceWith,
+    intersection,
+    nth,
+    pull,
+    pullAll,
   };
 }()
