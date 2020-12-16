@@ -48,6 +48,39 @@ var anlianghui = function () {
     }
     return res;
   }
+  function differenceBy(arr,...vals) {
+    let res = [];
+    let func = vals[vals.length - 1];
+    if (typeof func == "function") {
+      vals.pop();
+      val = [].concat(...vals);
+      val.forEach((it, i, val) => {
+        val[i] = func(it);
+      });
+      for (let i = 0; i < arr.length; i ++) {
+        if (!val.includes(func(arr[i]))) {
+          res.push(arr[i])
+        }
+      }
+    } else if (typeof func == "string") {
+      let map = {};
+      vals.pop();
+      val = [].concat(...vals);
+      val.forEach(it => {
+        if (it[func] !== undefined) {
+          map[func] = it[func];
+        }
+      });
+      for (let i = 0; i < arr.length; i ++) {
+        if (arr[i][func] !== map[func]) {
+          res.push(arr[i]);
+        }
+      }
+    }else {
+      res = difference(arr, ...vals);
+    }
+    return res;
+  }
   function differenceWith(arr, val, func) {
     let res = [];
     for (let i = 0; i < arr.length; i ++) {
@@ -102,6 +135,18 @@ var anlianghui = function () {
           res.pop(res[i]);
       }
   }
+    return res;
+  }
+  function dropWhile(arr, func) {
+    let res = arr.slice();
+    func = isSame(func);
+    while (1) {
+      if (!func(res[0])) {
+          break;
+      } else {
+          res.shift(res[0]);
+      }
+    }
     return res;
   }
   function fill(arr, val, start = 0, end = arr.length) {
@@ -269,6 +314,60 @@ var anlianghui = function () {
     }
     return res;
   }
+  function intersectionBy(arr, ...arrs) {
+    let res = [];
+    let func = arrs[arrs.length - 1];
+    if (typeof func == "function") {
+      arrs.pop();
+      for (let a of arrs) {
+        a.forEach((it, i, val) => {
+          val[i] = func(it);
+        });
+      }
+      for (let i of arr) {
+        let flag = true;
+        for (let a of arrs) {
+          if (!a.includes(func(i))) {
+            flag = false;
+            break;
+          }
+        }
+        flag && res.push(i);
+      }
+    } else if (typeof func == "string") {
+      arrs.pop();
+      let map = {};
+      arr.forEach(it => {
+        if (it[func] !== undefined) {
+          map[func] = it[func];
+        }
+      });
+      let count = 0;
+      for (let i of arrs) {
+        for (let j of i) {
+          if(j[func] == map[func]) {
+            res.push(j);
+            break;
+          }
+        }
+      }
+    }else {
+      res = intersection(arr, ...arrs);
+    }
+    return res;
+  }
+  function intersectionWith(arr, ...arrs) {
+    let res = [];
+    let func = arrs.pop();
+    for (let i of arr) {
+      for (let j of arrs) {
+        if (func(i, j)) {
+          res.push(i);
+        }
+      }
+    }
+    return res;
+  }
   function nth(arr, n = 0) {
     if (n < 0) n = arr.length + n;
     return arr[n]
@@ -297,12 +396,15 @@ var anlianghui = function () {
     compact,
     concat,
     difference,
+    differenceBy,
+    differenceWith,
     join,
     last,
     lastIndexOf,
     drop,
     dropRight,
     dropRightWhile,
+    dropWhile,
     fill,
     findIndex,
     findLastIndex,
@@ -320,8 +422,9 @@ var anlianghui = function () {
     max,
     min,
     sum,
-    differenceWith,
     intersection,
+    intersectionBy,
+    intersectionWith,
     nth,
     pull,
     pullAll,
