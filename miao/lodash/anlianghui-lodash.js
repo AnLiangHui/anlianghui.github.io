@@ -93,14 +93,15 @@ var anlianghui = function () {
     return arr;
   }
   function dropRightWhile(arr, func) {
-    let res = [];
+    let res = arr.slice();
     func = isSame(func);
-    for (let i = 0; i < arr.length; i ++) {
-      res.push(arr[i].user);
-      if (!func(arr[i])) {
-        break;
+    for (var i = res.length - 1; i >= 0; i--) {
+      if (!func(res[i])) {
+          break;
+      } else {
+          res.pop(res[i]);
       }
-    }
+  }
     return res;
   }
   function fill(arr, val, start = 0, end = arr.length) {
