@@ -359,6 +359,7 @@ var anlianghui = function () {
   function intersectionWith(arr, ...arrs) {
     let res = [];
     let func = arrs.pop();
+    arrs = flatten(...ars);
     for (let i of arr) {
       for (let j of arrs) {
         if (func(i, j)) {
