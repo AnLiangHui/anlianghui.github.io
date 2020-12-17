@@ -391,6 +391,39 @@ var anlianghui = function () {
     }
     return res;
   }
+  function pullAllBy(array, values, func) {
+    if (typeof func == 'string') {
+      let count = 0, len = array.length;
+      while (count < len){
+        let flag = true
+        for (let i = 0; i < values.length; i ++) {
+          if (array[0][func] === values[i][func]) {
+            flag = false;
+            array.shift();
+            break;
+          }
+        }
+        count ++;
+        flag && array.push(array.shift());
+      }
+      return array;
+    }
+  }
+  function pullAllWith(array, values, func) {
+    let count = 0, len = array.length;
+    while (count < len) {
+      let flag = true;
+      for (let i of values) {
+        if (func(array[0], i)) {
+          array.shift();
+          flag = false;
+          break;
+        }
+      }
+      count ++;
+      flag && array.push(array.shift());
+    }
+  }
   
   return {
     chunk,
@@ -429,5 +462,7 @@ var anlianghui = function () {
     nth,
     pull,
     pullAll,
+    pullAllBy,
+    pullAllWith,
   };
 }()
