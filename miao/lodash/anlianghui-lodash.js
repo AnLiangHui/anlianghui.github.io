@@ -423,6 +423,7 @@ var anlianghui = function () {
       count ++;
       flag && array.push(array.shift());
     }
+    return array;
   }
   
   return {
