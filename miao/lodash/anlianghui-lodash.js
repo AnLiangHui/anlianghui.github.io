@@ -331,6 +331,48 @@ var anlianghui = function () {
     })
     return res;
   }
+  function tail(arr) {
+    return slice(arr, 1);
+  }
+  function take(arr, n = 1) {
+    return slice(arr, 0, n);
+  }
+  function takeRight(arr, n = 1) {
+    return slice(arr, arr.length - n);
+  }
+  function takeRightWhile(arr, func) {
+    let res = [];
+    func = isSame(func);
+    for (let i = arr.length - 1; i >= 0; i --) {
+      if (func(arr[i])) {
+        res.unshift(arr[i]);
+      }else {
+        break;
+      }
+    }
+    return res;
+  }
+  function takeWhile(arr, func) {
+    let res = [];
+    func = isSame(func);
+    for (let i = 0; i < arr.length; i ++) {
+      if (func(arr[i])) {
+        res.push(arr[i]);
+      }else {
+        break;
+      }
+    }
+    return res;
+  }
+  function slice(arr, start = 0, end = arr.length) {
+    let res = [];
+    if (end > arr.length) end = arr.length;
+    if (start < 0) start = 0;
+    for (let i = start; i < end; i ++) {
+      res.push(arr[i]);
+    }
+    return res;
+  }
   function includes(collection, val, fromIndex = 0) {
     if (Object.prototype.toString.call(collection) == "[object Object]") {
       collection = Object.values(collection);
@@ -535,6 +577,7 @@ var anlianghui = function () {
     indexOf,
     initial,
     reverse,
+    slice,
     sortedIndex,
     sortedIndexBy,
     sortedIndexOf,
@@ -543,6 +586,11 @@ var anlianghui = function () {
     sortedLastIndexOf,
     sortedUniq,
     sortedUniqBy,
+    tail,
+    take,
+    takeRight,
+    takeRightWhile,
+    takeWhile,
     toArray,
     add,
     max,
