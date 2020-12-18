@@ -269,6 +269,90 @@ var anlianghui = function () {
       }
     }
   }
+  function sortedIndexBy(arr, val, func) {
+    func = isSame(func);
+    for (let i in arr) {
+      if (func(val) <= func(arr[i])) {
+        return +i;
+      }
+    }
+  }
+  function sortedIndexOf(arr, val) {  
+    for (let i in arr) {
+      if (arr[i] == val) return +i;
+    }
+    return -1;
+  }
+  function sortedLastIndex(arr, val) {
+    let i = arr.length - 1;
+    while (i >= 0) {
+      if (arr[i] <= val) {
+        return i + 1;
+      }
+      i --;
+    }
+    return -1;
+  }
+  function sortedLastIndexBy(arr, val, func) {
+    func = isSame(func);
+    for (let i in arr) {
+      if (func(arr[i]) > func(val)) {
+        return +i;
+      }
+    }
+    return arr.length;
+  }
+  function sortedLastIndexOf(arr, val) {
+    let i = arr.length - 1;
+    while (i >= 0) {
+      if (arr[i] == val) {
+        return i;
+      }
+      i --;
+    }
+    return -1;
+  }
+  function sortedUniq(arr) {
+    let res = [];
+    for (let v of arr) {
+      if (!includes(res, v)) {
+        res.push(v);
+      }
+    }
+    return res;
+  }
+  function sortedUniqBy(arr, func) {
+    let res = [], flag;
+    arr.forEach(it => {
+      if (flag !== func(it)) {
+        res.push(it);
+      }
+      flag = func(it);
+    })
+    return res;
+  }
+  function includes(collection, val, fromIndex = 0) {
+    if (Object.prototype.toString.call(collection) == "[object Object]") {
+      collection = Object.values(collection);
+    }
+    if (typeof collection == 'string') {
+      let count = 0, j = 0;
+      for (let i = fromIndex; i < collection.length; i ++) {
+        if (collection[i] == val[j]) {
+          j ++;
+          if (j == val.length) return true;
+        }else {
+          j = 0;
+        }
+      }
+      return false;
+    }
+    if(indexOf(collection, val, fromIndex) >= 0) {
+      return true
+    }else {
+      return false;
+    }
+  }
   function toArray(val) {
     var res = [];
     for (var i in val) {
@@ -452,6 +536,13 @@ var anlianghui = function () {
     initial,
     reverse,
     sortedIndex,
+    sortedIndexBy,
+    sortedIndexOf,
+    sortedLastIndex,
+    sortedLastIndexBy,
+    sortedLastIndexOf,
+    sortedUniq,
+    sortedUniqBy,
     toArray,
     add,
     max,
@@ -465,5 +556,6 @@ var anlianghui = function () {
     pullAll,
     pullAllBy,
     pullAllWith,
+    includes,
   };
 }()
