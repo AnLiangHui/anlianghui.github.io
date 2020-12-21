@@ -551,6 +551,103 @@ var anlianghui = function () {
     }
     return array;
   }
+  function union(...arr) {
+    let res = [];
+    arr = flatten(arr);
+    arr.forEach(it => {
+      if(!includes(res, it)) {
+        res.push(it);
+      }
+    })
+    return res;
+  }
+  function unionBy(...arr) {  
+    let res = [];
+    let box = [];
+    let func = isSame(arr.pop());
+    arr = flatten(arr);
+    arr.forEach(it => {
+      if (!includes(box, func(it))) {
+        box.push(func(it));
+        res.push(it);
+      }
+    });
+    return res;
+  }
+  function unionWith(...arr) {  
+    let func = arr.pop();
+    arr = flatten(arr);
+    let res = [];
+    arr.forEach(itArr => {
+      let flag = true;
+      res.forEach(itRes => {
+        if (func(itArr,itRes)) flag = false;
+      })
+      flag && res.push(itArr);
+    })
+    return res;
+  }
+  function uniq(arr) {  
+    let res = [];
+    arr.forEach(it => {
+      if (!includes(res, it)) res.push(it);
+    });
+    return res;
+  }
+  function uniqBy(arr, func) {  
+    let res = [], box = [];
+    func = isSame(func);
+    arr.forEach(it => {
+      if (!includes(box, func(it))) {
+        box.push(func(it));
+        res.push(it);
+      }
+    });
+    return res;
+  }
+  function uniqWith(arr, func) {  
+    let res = [];
+    arr.forEach(itArr => {
+      let flag = true;
+      res.forEach(itRes => {
+        if (func(itArr, itRes)) flag = false;
+      });
+      flag && res.push(itArr);
+    })
+    return res;
+  }
+  function isEqual(value, other) {  
+    return isSame(other)(value);
+  }
+  function zip(...arr) {  
+    let res = [], len = arr[0].length;
+    while (len) {
+      res.push([]);
+      len --;
+    }
+    arr.forEach(it => {
+      it.forEach((itIt, i) => {
+        res[i].push(itIt);
+      });
+    });
+    return res;
+  }
+  function unzip(arr) {
+    return zip(...arr);
+  }
+  function unzipWith(arr, func) {
+    let res = [],len = arr[0].length;
+    while (len) {
+      res.push(0);
+      len --;
+    }
+    arr.forEach(it => {
+      it.forEach((itIt, i) => {
+        res[i] += itIt;
+      });
+    });
+    return res;
+  }
   
   return {
     chunk,
@@ -605,5 +702,15 @@ var anlianghui = function () {
     pullAllBy,
     pullAllWith,
     includes,
+    union,
+    unionBy,
+    unionWith,
+    uniq,
+    uniqBy,
+    uniqWith,
+    isEqual,
+    zip,
+    unzip,
+    unzipWith,
   };
 }()
