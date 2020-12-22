@@ -169,7 +169,7 @@ var anlianghui = function () {
     if (typeof func == 'object') {
       return function (o) {
         for (var i in o) {
-          if(o[i] != func[i]) {
+          if(func[i] !== undefined && o[i] != func[i]) {
             return false;
           }
         }
@@ -632,6 +632,26 @@ var anlianghui = function () {
     });
     return res;
   }
+  function zipObject(props = [], val = []) {  
+    let res = {};
+    for (let i in props) {
+      res[props[i]] = val[i];
+    }
+    return res;
+  }
+  function zipObjectDeep(props = [], val = []) {  
+   
+  }
+  function zipWith(...arrs) { 
+    let func = arrs[arrs.length - 1];
+    let res = [];
+    if (Array.isArray(func)) {
+      return zip(...arrs);
+    }else {
+      arrs.pop();
+      return res = zip(...arrs).map(it => func(...it));
+    }
+  }
   function unzip(arr) {
     return zip(...arr);
   }
@@ -643,12 +663,207 @@ var anlianghui = function () {
     }
     arr.forEach(it => {
       it.forEach((itIt, i) => {
-        res[i] += itIt;
+        res[i] = func(res[i], itIt);
       });
     });
     return res;
   }
-  
+  function ary(func, n = func.length) {  
+    return function (...args) {  
+      return func(...args.slice(0, n));
+    };
+  }
+  function before(n, func) {  
+    let c = 0, res;
+    return function (...args) {  
+      if (c < n) {
+        return res = func.call(this, ...args);
+        c ++;
+      }else {
+        return res;
+      }
+    }
+  }
+  function after(n, func) {  
+    let c = 0;
+    return function (...args) {  
+      c ++;
+      if (c > n) {
+        return func.call(this, ...args);
+      }
+    }
+  }
+  function identity(val) {
+    return val;
+  }
+  function without(arr, ...vals) {  
+    let res = [];
+    arr.forEach(it => {
+      if (!includes(vals, it)) {
+        res.push(it);
+      }
+    });
+    return res;
+  }
+  function xor(...arrs) {  
+    let map = new Map();
+    let res = [];
+    arrs.forEach(it => {
+      it.forEach((itVal, iV, arr) => {
+        if (map.has(itVal) && indexOf(arr, itVal) == iV) {
+          map.set(itVal, map.get(itVal) + 1);
+        }else {
+          map.set(itVal, 1);
+        }
+      });
+    });
+    for (let v of map) {
+      if (v[1] == 1) {
+        res.push(v[0]);
+      }
+    }
+    return res;
+  }
+  function xorBy(...arrs) {  
+    let func;
+    if (!Array.isArray(arrs[arrs.length - 1])) {
+      func = isSame(arrs.pop());
+    }else {
+      func = identity;
+    }
+    let map = new Map(), box = [];
+    let res = [];
+    arrs.forEach(it => {
+      it.forEach((itVal, iV, arr) => {
+        let index = indexOf(box, func(itVal));
+        if (index == -1) {
+          box.push(func(itVal));
+          map.set(itVal, 1);
+        }else {
+          if(indexOf(arr, itVal) == iV) {
+            for (let v of map) {
+              if (func(v[0]) == func(itVal)) {
+                map.set(v[0], map.get(v[0]) + 1);
+              }
+            }
+          }
+        }
+      });
+    });
+    for (let v of map) {
+      if (v[1] == 1) {
+        res.push(v[0]);
+      }
+    }
+    return res;
+  }
+  function xorWith(...arrs) {
+    let func = arrs[arrs.length - 1];
+    let res = [];
+    let map = new Map();
+    if (Array.isArray(func)) {
+      return flatten(arrs);
+    }else {
+      arrs.pop();
+      arrs.forEach(it => {
+        it.forEach(itArr => {
+          let flag = true;
+          for (let v of map) {
+            if (func(v[0], itArr)) {
+              map.set(v[0], map.get(v[0]) + 1);
+              flag = false;
+              break;
+            }
+          }
+          flag && map.set(itArr, 1);
+        });
+      });
+    }
+    for (let v of map) {
+      if (v[1] == 1) {
+        res.push(v[0]);
+      }
+    }
+    return res;
+  }
+  function countBy(arr, func = identity) { 
+    let res = {}; 
+    if (typeof arr[0] == 'number') {
+      for (let v of arr) {
+        res[func(v)] ? res[func(v)] ++ : res[func(v)] = 1;
+      }
+    }else {
+      for (let v of arr) {
+        res[v.length] ? res[v.length] ++ : res[v.length] = 1;
+      }
+    }
+    return res;
+  }
+  function every(arr, func = identity) {  
+    func = isSame(func);
+    for (let v of arr) {
+      if (!func(v)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function filter(arr, func = identity) {  
+    let res = [];
+    func = isSame(func);
+    for (let v of arr) {
+      if (func(v)) {
+        res.push(v);
+      }
+    }
+    return res;
+  }
+  function find(arr, func = identity, fromIndex = 0) {  
+    let res = [];
+    func = isSame(func);
+    for (let i = fromIndex; i < arr.length; i ++) {
+      if (func(arr[i])) {
+        return arr[i];
+      }
+    }
+    return undefined;
+  }
+  function findLast(arr, func = identity, fromIndex = arr.length - 1) {  
+    let res = [];
+    func = isSame(func);
+    for (let i = fromIndex; i >= 0; i --) {
+      if (func(arr[i])) {
+        return arr[i];
+      }
+    }
+    return undefined;
+  }
+  function flatMap(arr, func = identity) {  
+    let res = [];
+    func = isSame(func);
+    for (let v of arr) {
+      res.push(func(v));
+    }
+    return flatten(res);
+  }
+  function flatMapDeep(arr, func = identity) {  
+    return flattenDeep(flatMap(arr, func));
+  }
+  function flatMapDepth(arr, func = identity, depth = 1) {  
+    return flattenDepth(flatMap(arr, func, depth));
+  }
+  function forEach(arr, func = identity) {  
+    for (let v in arr) {
+      func(arr[v], v, arr);
+    }
+    return arr;
+  }
+  function forEachRight(arr, func = identity) {  
+    for (let i = arr.length - 1; i >= 0; i --) {
+      func(arr[i], i, arr);
+    }
+    return arr;
+  }
   return {
     chunk,
     compact,
@@ -710,7 +925,28 @@ var anlianghui = function () {
     uniqWith,
     isEqual,
     zip,
+    zipObject,
+    zipObjectDeep,
+    zipWith,
     unzip,
     unzipWith,
+    identity,
+    ary,
+    before,
+    after,
+    without,
+    xor,
+    xorBy,
+    xorWith,
+    countBy,
+    every,
+    filter,
+    find,
+    findLast,
+    flatMap,
+    flatMapDeep,
+    flatMapDepth,
+    forEach,
+    forEachRight,
   };
 }()
