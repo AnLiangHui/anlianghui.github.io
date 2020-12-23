@@ -990,7 +990,63 @@ var anlianghui = function () {
   function defer(func, ...args) {  
     return setTimeout(func, 0, ...args);
   }
-
+  function delay(func, wait, ...args) {
+    return setTimeout(func, wait, ...args);
+  }
+  function flip(func) {
+    return function(...args) {
+      return func(...args.reverse());
+    }
+  }
+  function castArray(val = []) {
+    if (!Array.isArray(val)) {
+      return [val];
+    }
+    return val;
+  }
+  function conformsTo(obj, source) {
+    for (let i in obj) {
+      if (source[i] && !source[i](obj[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function eq(value, other) {
+    if (value !== value && other !== other) return true;
+    return value === other;
+  }
+  function gt(value, other) {
+    return value > other;
+  }
+  function gte(value, other) {
+    return value >= other;
+  }
+  function isArguments(val) {
+    return Object.prototype.toString.call(val) === "[object Arguments]";
+  }
+  function isArray(val) {
+    return Object.prototype.toString.call(val) === "[object Array]";
+  }
+  function isArrayBuffer(val) {
+    return Object.prototype.toString.call(val) === "[object ArrayBuffer]";
+  }
+  function isArrayLike(val) {
+    return typeof val !== 'function' && val.length >= 0 && val.length <= Number.MAX_SAFE_INTEGER;
+  }
+  function isArrayLikeObject(val) {
+    return isArrayLike(val) && Object.prototype.toString.call(val) !== "[object Object]";
+  }
+  function isBoolean(val) {
+    return Object.prototype.toString.call(val) === "[object Boolean]";
+  }
+  function isDate(val) {  
+    return Object.prototype.toString.call(val) === "[object Date]";
+  }
+  function isElement(val) {
+    return Object.prototype.toString.call(val) === "[object HTMLBodyElement]";
+  }
+  
 
   return {
     chunk,
@@ -1091,5 +1147,20 @@ var anlianghui = function () {
     size,
     some,
     defer,
+    delay,
+    flip,
+    castArray,
+    conformsTo,
+    eq,
+    gt,
+    gte,
+    isArguments,
+    isArray,
+    isArrayBuffer,
+    isArrayLike,
+    isArrayLikeObject,
+    isBoolean,
+    isDate,
+    isElement,
   };
 }()
