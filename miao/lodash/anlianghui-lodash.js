@@ -864,6 +864,134 @@ var anlianghui = function () {
     }
     return arr;
   }
+  function groupBy(arr, func = identity) {  
+    let res = {};
+    func = isSame(func);
+    for (let v of arr) {
+      if (res[func(v)]) {
+        res[func(v)].push(v);
+      }else {
+        res[func(v)] = [v];
+      }
+    }
+    return res;
+  }
+  function invokeMap(arr, path, ...args) {
+    let res = [];
+    if (typeof path == 'string') {
+      res = arr.map(it => it[path](...args));
+    }
+    if (typeof path == 'function') {
+      res = arr.map(it => path.call(it, ...args));
+    }
+    return res;
+  }
+  function map(arr, func = identity) {  
+    let res = [];
+    func = isSame(func);
+    for (let i in arr) {
+      res.push(func(arr[i]));
+    }
+    return res;
+  }
+  function keyBy(arr, func = identity) {  
+    let res = {};
+    func = isSame(func);
+    for (let i in arr) {
+      res[func(arr[i])] = arr[i];
+    }
+    return res;
+  }
+  function orderBy(arr, func = [identity], orders = ['asc', 'asc']) {  
+    arr.sort((a, b) => {
+        if (orders[0] == 'asc') {
+          return a[func[0]] - b[func[0]];
+        }else {
+          return b[func[0]] - a[func[0]];
+        }
+    });
+    return arr;
+  }
+  function partition(arr, func = identity) {  
+    func = isSame(func);
+    let res = [[],[]];
+    for (let i in arr) {
+      if (func(arr[i])) {
+        res[0].push(arr[i]);
+      }else {
+        res[1].push(arr[i]);
+      }
+    }
+    return res;
+  }
+  function reduce(arr, func = identity, acc) {  
+    for (let i in arr) {
+      if (acc == undefined) {
+        acc = arr[i];
+        continue;
+      }
+      acc = func(acc, arr[i], i);
+    }
+    return acc;
+  }
+  function reduceRight(arr, func = identity, acc) {  
+    for (let i = arr.length - 1; i >= 0; i --) {
+      if (acc == undefined) {
+        acc = arr[i];
+        continue;
+      }
+      acc = func(acc, arr[i], i);
+    }
+    return acc;
+  }
+  function reject(arr, func) {  
+    let res = [];
+    func = isSame(func);
+    for (let i in arr) {
+      if(!func(arr[i])) {
+        res.push(arr[i]);
+      }
+    }
+    return res;
+  }
+  function sample(arr) {  
+    return arr[Math.random() * arr.length | 0];
+  }
+  function sampleSize(arr, n = 1) {  
+    let res = [];
+    if (n > arr.length) n = arr.length;
+    while (n) {
+      let t = arr[Math.random() * arr.length | 0]
+      if(!includes(res, t)) {
+        res.push(t);
+        n --;
+      }
+    }
+    return res;
+  }
+  function shuffle(arr) {  
+    return sampleSize(arr, arr.length);
+  }
+  function size(arr) {  
+    if (Object.prototype.toString.call(arr) == "[object Object]") {
+      return Object.keys(arr).length;
+    }
+    return arr.length;
+  }
+  function some(arr, func) {  
+    func = isSame(func);
+    for (let i in arr) {
+      if (func(arr[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+  function defer(func, ...args) {  
+    return setTimeout(func, 0, ...args);
+  }
+
+
   return {
     chunk,
     compact,
@@ -948,5 +1076,20 @@ var anlianghui = function () {
     flatMapDepth,
     forEach,
     forEachRight,
+    groupBy,
+    invokeMap,
+    map,
+    keyBy,
+    orderBy,
+    partition,
+    reduce,
+    reduceRight,
+    reject,
+    sample,
+    sampleSize,
+    shuffle,
+    size,
+    some,
+    defer,
   };
 }()
