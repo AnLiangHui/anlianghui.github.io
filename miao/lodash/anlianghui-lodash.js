@@ -180,6 +180,12 @@ var anlianghui = function () {
       return func;
     }
     if (typeof func == 'string') {
+      let index = indexOf(func, '.')
+      if (index) {
+        return function (o) {  
+          return o[func.slice(0, index)][func.slice(index + 1)]
+        }
+      }
       return function(o) {
         return o[func];
       }
@@ -890,7 +896,7 @@ var anlianghui = function () {
     let res = [];
     func = isSame(func);
     for (let i in arr) {
-      res.push(func(arr[i]));
+      res.push(func(arr[i], i, arr));
     }
     return res;
   }
@@ -988,17 +994,20 @@ var anlianghui = function () {
     return false;
   }
   function defer(func, ...args) {  
-    return setTimeout(func, 0, ...args);
+    return setTimeout(func, 0, ...args) - 1;
   }
   function delay(func, wait, ...args) {
-    return setTimeout(func, wait, ...args);
+    return setTimeout(func, wait, ...args) - 1;
   }
   function flip(func) {
     return function(...args) {
       return func(...args.reverse());
     }
   }
-  function castArray(val = []) {
+  function castArray(val) {
+    if (arguments.length === 0) {
+      return [];
+    }
     if (!Array.isArray(val)) {
       return [val];
     }
