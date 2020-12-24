@@ -617,7 +617,24 @@ var anlianghui = function () {
     return res;
   }
   function isEqual(value, other) {  
-    return isSame(other)(value);
+    if (value === other) return true;
+    if (size(value) == 0 && size(other) == 0) return true;
+    if (Object.prototype.toString.call(value) !== Object.prototype.toString.call(other)) return false;
+    if (size(value) !== size(other)) return false;
+    if (typeof value === 'object') {
+      for (let i in value) {
+        if (!isEqual(value[i], other[i])) return false;
+      }
+      return true;
+    }
+    return value === other;
+  }
+  function isEqualWith(value, other, func) {
+    if (func == undefined) return isEqual(value, other);
+    for (let i in value) {
+      if (!func(value[i], other[i]) && value[i] !== other[i]) return false;
+    }
+    return true;
   }
   function zip(...arr) {  
     let res = [], len = arr[0].length;
@@ -1049,6 +1066,125 @@ var anlianghui = function () {
   function isElement(val) {
     return Object.prototype.toString.call(val) === "[object HTMLBodyElement]";
   }
+  function curry(f, length = f.length) {
+    return function (...args) {
+        if (args.length < length) {
+            return curry(f.bind(null, ...args), length - args.length)
+        } else {
+            return f(...args)
+        }
+    }
+  }
+  function isEmpty(val) {  
+    for (let i in val) {
+      return false;
+    }
+    return true;
+  }
+  function isError(val) {
+    return Object.prototype.toString.call(val) === "[object Error]";
+  }
+  function isFinite(val) {
+    if (typeof val == 'number') {
+      return val + 1 !== val;
+    }
+    return false;
+  }
+  function isFunction(val) {  
+    return typeof val === 'function';
+  }
+  function isInteger(val) {  
+    return isFinite(val) && val + 1 - 1 == val;
+  }
+  function isLength(val) {
+    return isInteger(val) && val < 10 ** 15;
+  }
+  function isMap(val) {  
+    return Object.prototype.toString.call(val) === "[object Map]";
+  }
+  function isMatch(object, source) {  
+    for (let i in object) {
+      if (isEqual(object[i], source[i])) return true;
+    }
+    return false;
+  }
+  function isMatchWith(object, source, func) {  
+    if (func == undefined) return isMatch(object, source);
+    for (let i in object) {
+      if (func(object[i], source[i])) return true;
+    }
+    return false;
+  }
+  function isNaN(val) {
+    if (typeof val == 'number' || typeof val == 'object') {
+      return val.valueOf() !== val.valueOf();
+    }
+    return val !== val;
+  }
+  function isNative(val) {  
+    return includes(Function.prototype.toString.call(val), "[native code]");
+  }
+  function isNil(val) {
+    return val === null || val === undefined;
+  }
+  function isNull(val) {
+    return val === null;
+  }
+  function isNumber(val) {
+    return Object.prototype.toString.call(val) === '[object Number]';
+  }
+  function isObject(val) {  
+    return val !== null && typeof val === 'object' || typeof val === 'function';
+  }
+  function isObjectLike(val) {  
+    return val !== null && typeof val === 'object';
+  }
+  function isPlainObject(val) {  
+    return val.__proto__ == Object.prototype || val.__proto__ == null;
+  }
+  function isRegExp(val) {
+    return Object.prototype.toString.call(val) === '[object RegExp]';
+  }
+  function isSafeInteger(val) {
+    return isInteger(val) && Math.floor(val) == val;
+  }
+  function isSet(val) {
+    return Object.prototype.toString.call(val) === '[object Set]';
+  }
+  function isString(val) {
+    return Object.prototype.toString.call(val) === '[object String]';
+  }
+  function isSymbol(val) {
+    return Object.prototype.toString.call(val) === '[object Symbol]';
+  }
+  function isTypedArray(val) {
+    return Object.prototype.toString.call(val) === '[object Uint8Array]';
+  }
+  function isUndefined(val) {
+    return Object.prototype.toString.call(val) === '[object Undefined]';
+  }
+  function isWeakMap(val) {
+    return Object.prototype.toString.call(val) === '[object WeakMap]';
+  }
+  function isWeakSet(val) {
+    return Object.prototype.toString.call(val) === '[object WeakSet]';
+  }
+  function lt(value, other) {
+    return value < other;
+  }
+  function lt3(value, other) {
+    return value <= other;
+  }
+  function toFinite(val) {
+    if (val > Number.MAX_SAFE_INTEGER) {
+      return 1.7976931348623157e+308;
+    }
+    if (val < Number.MIN_SAFE_INTEGER) {
+      return 5e-324;
+    }
+    return +val;
+  }
+
   
 
   return {
@@ -1111,6 +1247,7 @@ var anlianghui = function () {
     uniqBy,
     uniqWith,
     isEqual,
+    isEqualWith,
     zip,
     zipObject,
     zipObjectDeep,
@@ -1165,5 +1302,35 @@ var anlianghui = function () {
     isBoolean,
     isDate,
     isElement,
+    curry,
+    isEmpty,
+    isError,
+    isFinite,
+    isFunction,
+    isInteger,
+    isLength,
+    isMap,
+    isMatch,
+    isMatchWith,
+    isNaN,
+    isNative,
+    isNil,
+    isNull,
+    isNumber,
+    isObject,
+    isObjectLike,
+    isPlainObject,
+    isRegExp,
+    isSafeInteger,
+    isSet,
+    isString,
+    isSymbol,
+    isTypedArray,
+    isUndefined,
+    isWeakMap,
+    isWeakSet,
+    lt,
+    lt3,
+    toFinite,
   };
 }()
