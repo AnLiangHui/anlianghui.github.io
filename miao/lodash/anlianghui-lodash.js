@@ -185,9 +185,10 @@ var anlianghui = function () {
         return function (o) {  
           return o[func.slice(0, index)][func.slice(index + 1)]
         }
-      }
-      return function(o) {
-        return o[func];
+      }else {
+        return function(o) {
+          return o[func];
+        }
       }
     }
   }
