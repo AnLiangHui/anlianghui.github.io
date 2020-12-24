@@ -181,13 +181,13 @@ var anlianghui = function () {
     }
     if (typeof func == 'string') {
       let index = indexOf(func, '.')
-      if (index) {
-        return function (o) {  
-          return o[func.slice(0, index)][func.slice(index + 1)]
-        }
-      }else {
+      if (index == -1) {
         return function(o) {
           return o[func];
+        }
+      }else {
+        return function (o) {  
+          return o[func.slice(0, index)][func.slice(index + 1)]
         }
       }
     }
