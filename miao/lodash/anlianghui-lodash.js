@@ -180,15 +180,8 @@ var anlianghui = function () {
       return func;
     }
     if (typeof func == 'string') {
-      let index = indexOf(func, '.')
-      if (index == -1) {
-        return function(o) {
-          return o[func];
-        }
-      }else {
-        return function (o) {  
-          return o[func.slice(0, index)][func.slice(index + 1)]
-        }
+      return function(o) {
+        return o[func];
       }
     }
   }
@@ -897,7 +890,7 @@ var anlianghui = function () {
     let res = [];
     func = isSame(func);
     for (let i in arr) {
-      res.push(func(arr[i], i, arr));
+      res.push(func(arr[i]));
     }
     return res;
   }
