@@ -1172,17 +1172,170 @@ var anlianghui = function () {
   function lt(value, other) {
     return value < other;
   }
-  function lt3(value, other) {
+  function lte(value, other) {
     return value <= other;
   }
   function toFinite(val) {
-    if (val > Number.MAX_SAFE_INTEGER) {
+    if (val > Number.MAX_VALUE) {
       return 1.7976931348623157e+308;
     }
-    if (val < Number.MIN_SAFE_INTEGER) {
+    if (val < Number.MIN_VALUE) {
       return 5e-324;
     }
+    if (isNaN(+val)) return 0;
     return +val;
+  }
+  function toInteger(val) {
+    if (val > Number.MAX_VALUE) {
+      return Number.MAX_VALUE;
+    }
+    if (isNaN(+val)) return 0;
+    return val | 0;
+  }
+  function toLength(val) {
+    if (val < 0) return 0;
+    if (val > 4294967295) return 4294967295;
+    return toInteger(val);
+  }
+  function toNumber(val) {
+    if (typeof +val === "number") return +val;
+    return 0;
+  }
+  function toSafeInteger(val) {
+    if (val > Number.MAX_SAFE_INTEGER) {
+      return Number.MAX_SAFE_INTEGER;
+    }
+    if (val < Number.MIN_SAFE_INTEGER) {
+      return Number.MIN_SAFE_INTEGER;
+    }
+    return toInteger(val);
+  }
+  function assign(obj, ...source) {
+    source.forEach(it => {
+      for (let i of Object.keys(it)) {
+        obj[i] = it[i];
+      }
+    });
+    return obj;
+  }
+  function assignIn(obj, ...source) {
+    source.forEach(it => {
+      for (let i in it) {
+        obj[i] = it[i];
+      }
+    });
+    return obj;
+  }
+  function divide(dividend, dicisor) {
+    return dividend / dicisor;
+  }
+  function floor(val, precision = 0) {
+    return Math.floor(val * 10 ** precision) / 10 ** precision;
+  }
+  function max(arr) {
+    let max = arr[0];
+    for (let v of arr) {
+      if (v > max) max = v;
+    }
+    return max;
+  }
+  function maxBy(arr, func = identity) {
+    let max = arr[0];
+    func = isSame(func);
+    for (let v of arr) {
+      if (func(v) > func(max)) max = v;
+    }
+    return max;
+  }
+  function mean(arr) {
+    return sum(arr) / arr.length;
+  }
+  function meanBy(arr, func = identity) {
+    return sumBy(arr, func) / arr.length;
+  }
+  function min(arr) {
+    let min = arr[0];
+    for (let v of arr) {
+      if (v < min) min = v;
+    }
+    return min;
+  }
+  function minBy(arr, func = identity) {
+    let min = arr[0];
+    func = isSame(func);
+    for (let v of arr) {
+      if (func(v) < func(min)) min = v;
+    }
+    return min;
+  }
+  function multiply(multiplier, multiplicand) {
+    return multiplier * multiplicand;
+  }
+  function round(val, precision = 0) {
+    return Math.round(val * 10 ** precision) / 10 ** precision;
+  }
+  function subtract(minuend, subtrahend) {
+    return minuend - subtrahend;
+  }
+  function sum(arr) {
+    let sum = 0;
+    arr.forEach(it => sum += it);
+    return sum;
+  }
+  function sumBy(arr, func = identity) {
+    let sum = 0;
+    func = isSame(func);
+    arr.forEach(it => sum += func(it));
+    return sum;
+  }
+  function clamp(num, lower, upper) {
+    if (num < lower) return lower;
+    if (num > upper) return upper;
+    return num;
+  }
+  function inRange(num, start = 0, end) {
+    if (end == undefined) {
+      end = start;
+      start = 0;
+    } 
+    if (start > end) {
+      let t = start;
+      start = end;
+      end = t;
+    }
+    return num >= start && num < end;
+  }
+  function random(lower = 0, upper = 1, floating) {
+    if (typeof arguments[0] === "boolean" && arguments[0]) {
+      lower = 0;
+      upper = 1;
+      floating = true;
+    }
+    if (typeof arguments[1] === "boolean" && arguments[0]) {
+      upper = 1;
+      floating = true;
+    }
+    if (lower > upper) {
+      upper = lower;
+      lower = 0;
+    }
+    if (floating || (lower | 0) < lower || (upper | 0) < upper) {
+      return Math.random() * (upper - lower) + lower;
+    }
+    return Math.round(Math.random() * (upper - lower)) + lower;
+  }
+  function at(obj, paths) {
+    let reg = /\w+/g;
+    let res = [];
+    paths = paths.map(it => it.match(reg));
+    paths.forEach(it => {
+      let t = obj;
+      it.forEach(itt => {
+        t = t[itt];
+      });
+      res.push(t);
+    });
+    return res;
   }
 
   
@@ -1330,7 +1483,30 @@ var anlianghui = function () {
     isWeakMap,
     isWeakSet,
     lt,
-    lt3,
+    lte,
     toFinite,
+    toInteger,
+    toLength,
+    toNumber,
+    toSafeInteger,
+    assign,
+    assignIn,
+    divide,
+    floor,
+    max,
+    maxBy,
+    mean,
+    meanBy,
+    min,
+    minBy,
+    multiply,
+    round,
+    subtract,
+    sum,
+    sumBy,
+    clamp,
+    inRange,
+    random,
+    at,
   };
 }()
