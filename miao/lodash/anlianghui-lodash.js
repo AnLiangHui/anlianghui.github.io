@@ -913,7 +913,7 @@ var anlianghui = function () {
     let res = [];
     func = isSame(func);
     for (let i in arr) {
-      res.push(func(+arr[i], +i , arr));
+      res.push(func(arr[i], +i , arr));
     }
     return res;
   }
