@@ -912,8 +912,8 @@ var anlianghui = function () {
   function map(arr, func = identity) {  
     let res = [];
     func = isSame(func);
-    for (let i = 0; i < arr.length; i ++) {
-      res.push(func(arr[i], i ,arr));
+    for (let i in arr) {
+      res.push(func(+arr[i], +i , arr));
     }
     return res;
   }
