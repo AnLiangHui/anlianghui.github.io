@@ -1232,6 +1232,9 @@ var anlianghui = function () {
     });
     return obj;
   }
+  function ceil(val, precision = 0) {
+    return Math.ceil(val * 10 ** precision) / 10 ** precision;
+  }
   function divide(dividend, dicisor) {
     return dividend / dicisor;
   }
@@ -1330,7 +1333,6 @@ var anlianghui = function () {
     }
     return Math.round(Math.random() * (upper - lower)) + lower;
   }
-  
   function at(obj, paths) {
     let reg = /\w+/g;
     let res = [];
@@ -1344,7 +1346,292 @@ var anlianghui = function () {
     });
     return res;
   }
-  
+  function defaults(obj, ...sources) {
+    if (sources !== undefined) {
+      sources.forEach(it => {
+        for (let k in it) {
+          if (!obj[k]) obj[k] = it[k];
+        }
+      });
+    }
+    return obj;
+  }
+  function defaultsDeep(obj, ...sources) {  
+    if (sources !== undefined) {
+      sources.forEach(it => {
+        for (let k in it) {
+          if (!obj[k]) {
+            obj[k] = it[k];
+          }else {
+            if (isObject(it[k])) {
+              defaultsDeep(obj[k], it[k]);
+            }
+          }
+        }
+      });
+    }
+    return obj;
+  }
+  function findKey(obj, func = identity) { 
+    func = isSame(func); 
+    for (let k in obj) {
+      if (func(obj[k])) {
+        return k;
+      }
+    }
+  }
+  function findLastKey(obj, func = identity) {  
+    func = isSame(func);
+    let res;
+    for (let k in obj) {
+      if (func(obj[k])) {
+        res = k;
+      }
+    }
+    return res;
+  }
+  function forIn(obj, func = identity) {  
+    for (let k in obj) {
+      func(obj[k], k, obj);
+    }
+    return obj;
+  }
+  function forInRight(obj, func = identity) {  
+    let res = [];
+    for (let k in obj) {
+      res.push(obj[k], k, obj);
+    }
+    for (let i = res.length - 1; i >= 0; i -= 3) {
+      func(res[i], res[i - 1], res[i - 2]);
+    }
+    return obj;
+  }
+  function forOwn(obj, func = identity) {  
+    for (let k in obj) {
+      if (obj.__proto__[k] === undefined) {
+        func(obj[k], k, obj);
+      }
+    }
+    return obj;
+  }
+  function forOwnRight(obj, func = identity) {  
+    let res = [];
+    for (let k in obj) {
+      if (obj.__proto__[k] === undefined) {
+        res.push(obj[k], k, obj);
+      }
+    }
+    for (let i = res.length - 1; i >= 0; i -= 3) {
+      func(res[i], res[i - 1], res[i - 2]);
+    }
+    return obj;
+  }
+  function functions(obj) {  
+    let res = [];
+    for (let k in obj) {
+      if (obj.__proto__[k] === undefined) {
+        res.push(k);
+      }
+    }
+    return res;
+  }
+  function functionsIn(obj) {  
+    let res = [];
+    for (let k in obj) {
+      res.push(k);
+    }
+    return res;
+  }
+  function get(obj, path, defaultValue) {
+    if (isString(path)) {
+      let reg = /\w+/g;
+      path = path.match(reg);
+    }
+    for (let v of path) {
+      if (isFunction(obj[v])) {
+        func = obj[v];
+        continue;
+      }
+      if (obj[v]) {
+        obj = obj[v];
+      }else {
+        return defaultValue;
+      }
+    }
+    return obj;
+  }
+  function has(obj, path) {  
+    let res = get(obj, path);
+    return res !== undefined && size(res) !== 0; 
+  }
+  function hasIn(obj, path) {
+    if (isString(path)) {
+      let reg = /\w+/g;
+      path = path.match(reg);
+    }
+    for (let v of path) {
+      if (obj.__proto__[v]) {
+        obj = obj[v];
+      }else {
+        return false;
+      }
+    }
+    return true;
+  }
+  function invert(obj) {
+    let res = {};
+    for (let k in obj) {
+      res[obj[k]] = k;
+    }
+    return res;
+  }
+  function invertBy(obj, func = identity) {  
+    let res = {};
+    for (let k in obj) {
+       res[func(obj[k])] ? res[func(obj[k])].push(k) : res[func(obj[k])] = [k];
+    }
+    return res;
+  }
+  function invoke(obj, path, ...args) {
+    if (isString(path)) {
+      let reg = /\w+/g;
+      path = path.match(reg);
+    }
+    for (let v of path) {
+      if (isFunction(obj[v])) {
+        if (path[path.length - 1] === v) {
+          let func = v;
+          return obj[func](...args);
+        } else {
+          obj = obj[v]();
+          continue;
+        }
+      }
+      if (obj[v]) {
+        obj = obj[v];
+      }else {
+        return defaultValue;
+      }
+    }
+  }
+  function keys(obj) {  
+    let res = [];
+    let o = {};
+    if (!isObject(obj)) {
+      for (let i in obj) {
+        o[i] = obj[i];
+      }
+      obj = o;
+    }
+    for (let k in obj) {
+      if (obj.__proto__[k] === undefined) {
+        res.push(k);
+      }
+    }
+    return res;
+  }
+  function keysIn(obj) {  
+    let res = [];
+    let o = {};
+    if (!isObject(obj)) {
+      for (let i in obj) {
+        o[i] = obj[i];
+      }
+      obj = o;
+    }
+    for (let k in obj) {
+      res.push(k);
+    }
+    return res;
+  }
+  function mapKeys(obj, func = identity) {  
+    let res = {};
+    for (let k in obj) {
+      if (obj.__proto__[k] === undefined) {
+        res[func(obj[k], k, obj)] = obj[k];
+      }
+    }
+    return res;
+  }
+  function mapValues(obj, func = identity) {  
+    let res = {};
+    func = isSame(func);
+    for (let k in obj) {
+      if (obj.__proto__[k] === undefined) {
+        res[k] = func(obj[k], k, obj);
+      }
+    }
+    return res;
+  }
+  function merge(obj, ...sources) {  
+    sources.forEach(it => {
+      for (let k in it) {
+        if (obj[k]) {
+          for (let i in it[k]) {
+            if (obj[k][i]) {
+              for (let o in it[k][i]) {
+                obj[k][i][o] = it[k][i][o];
+              }
+            }else {
+              obj[k].push(it[k][i]);
+            }
+          }
+        }else {
+          obj[k] = it[k];
+        }
+      }
+    });
+    return obj;
+  }
+  function mergeWith(obj, ...sources) {  
+    let func = sources.pop();
+    sources.forEach(it => {
+      for (let k in it) {
+        if (obj[k]) {
+          obj[k] = func(obj[k], it[k], k, obj, it);
+        }else {
+          obj[k] = it[k];
+        }
+      }
+    });
+    return obj;
+  }
+  function omit(obj, props) {  
+    let res = {};
+    for (let k in obj) {
+      if (!includes(props, k)) {
+        res[k] = obj[k];
+      }
+    }
+    return res;
+  }
+  function omitBy(obj, func = identity) {  
+    let res = {};
+    for (let k in obj) {
+      if (!func(obj[k])) {
+        res[k] = obj[k];
+      }
+    }
+    return res;
+  }
+  function pick(obj, props) {  
+    let res = {};
+    for (let k in obj) {
+      if (includes(props, k)) {
+        res[k] = obj[k];
+      }
+    }
+    return res;
+  }
+  function pickBy(obj, func = identity) {  
+    let res = {};
+    for (let k in obj) {
+      if (func(obj[k])) {
+        res[k] = obj[k];
+      }
+    }
+    return res;
+  }
 
   return {
     chunk,
@@ -1497,6 +1784,7 @@ var anlianghui = function () {
     toSafeInteger,
     assign,
     assignIn,
+    ceil,
     divide,
     floor,
     max,
