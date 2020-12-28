@@ -180,8 +180,14 @@ var anlianghui = function () {
       return func;
     }
     if (typeof func == 'string') {
+      let reg = /\w+/g;
+      func = func.match(reg);
       return function(o) {
-        return o[func];
+        let t = o;
+        func.forEach(it => {
+          t = t[it];
+        });
+        return t;
       }
     }
   }
@@ -1324,6 +1330,7 @@ var anlianghui = function () {
     }
     return Math.round(Math.random() * (upper - lower)) + lower;
   }
+  
   function at(obj, paths) {
     let reg = /\w+/g;
     let res = [];
@@ -1337,7 +1344,6 @@ var anlianghui = function () {
     });
     return res;
   }
-
   
 
   return {
