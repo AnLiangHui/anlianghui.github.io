@@ -1676,7 +1676,7 @@ var anlianghui = function () {
     let t = obj;
     for (let i in path) {
       if (!t[path[i]]) {
-        if (isNumber(path[i + 1])) {
+        if (path[+i + 1] == 0) {
           t[path[i]] = [];
         }else {
           if (i == path.length - 1) {
@@ -1696,6 +1696,166 @@ var anlianghui = function () {
   }
   function setWith(obj, path, val, func) {
     return set(obj, path, func(val));
+  }
+  function toPairs(obj) {  
+    let res = [];
+    let arr = Object.keys(obj);
+    for (let v of arr) {
+      res.push([v, obj[v]]);
+    }
+    return res;
+  }
+  function toPairsIn(obj) {
+    let res = [];
+    for (let k in obj) {
+      res.push([k, obj[k]]);
+    }
+    return res;
+  }
+  function transform(obj, func = identity, acc) { 
+    if (isObject(obj)) {
+      if (acc == undefined) acc = {};
+      let arr = Object.keys(obj); 
+      for (let v of arr) {
+        if (func(acc, obj[v], v, obj) === false) {
+          break;
+        }
+      }
+    }else {
+      if (acc == undefined) acc = [];
+      for (let i = 0; i < obj.length; i ++) {
+        if(!func(acc, obj[i], i, obj) === false) {
+          break;
+        }
+      }
+    }
+    return acc;
+  }
+  function unset(obj, path) {
+    if (isString(path)) {
+      let reg = /\w+/g;
+      path = path.match(reg);
+    }
+    let t = obj;
+    for (let i in path) {
+      if (t[path[i]]) {
+        if (i == path.length - 1) {
+          delete t[path[i]];
+          return true;
+        }
+      }else {
+        return false;
+      }
+      t = t[path[i]];
+    }
+  }
+  function update(obj, path, func) {  
+    if (isString(path)) {
+      let reg = /\w+/g;
+      path = path.match(reg);
+    }
+    let t = obj;
+    for (let i in path) {
+      if (!t[path[i]]) {
+        if (path[+i + 1] == 0) {
+          t[path[i]] = [];
+        }else {
+          if (i == path.length - 1) {
+            t[path[i]] = func(t[path[i]]);
+          }else {
+            t[path[i]] = {};
+          } 
+        }
+      }else {
+        if (i == path.length - 1) {
+          t[path[i]] = func(t[path[i]]);
+        }
+      }
+      t = t[path[i]];
+    }
+    return obj;
+  }
+  function updateWith(obj, path, func, cus) {  
+    if (isString(path)) {
+      let reg = /\w+/g;
+      path = path.match(reg);
+    }
+    let t = obj;
+    for (let i in path) {
+      if (!t[path[i]]) {
+        if (path[+i + 1] == 0) {
+          t[path[i]] = [];
+        }else {
+          if (i == path.length - 1) {
+            t[path[i]] = cus(func(t[path[i]]), path[i], obj);
+          }else {
+            t[path[i]] = {};
+          } 
+        }
+      }else {
+        if (i == path.length - 1) {
+          t[path[i]] = cus(func(t[path[i]]), path[i], obj);
+        }
+      }
+      t = t[path[i]];
+    }
+    return obj;
+  }
+  function values(obj) {  
+    let res = [];
+    let o = {};
+    if (!isObject(obj)) {
+      for (let i = 0; i < obj.length; i ++) {
+        o[i] = obj[i];
+      }
+      obj = o;
+    }
+    let arr = Object.values(obj);
+    for (let v of arr) {
+      res.push(v);
+    }
+    return res;
+  }
+  function valuesIn(obj) {  
+    let res = [];
+    let o = {};
+    if (!isObject(obj)) {
+      for (let i in obj) {
+        o[i] = obj[i];
+      }
+      obj = o;
+    }
+    for (let k in obj) {
+      res.push(obj[k]);
+    }
+    return res;
+  }
+  function camelCase(str = '') {  
+    return str.toLowerCase()
+      .replace(/^[-_ ]*/, '')
+      .replace(/[-_ ][a-z]/g, match => {
+        return match[1].toUpperCase();
+      })
+      .replace(/[-_ ]/g, '');
+  }
+  function capitalize(str = '') {  
+    return str.toLowerCase().replace(/\w/, it => it.toUpperCase());
+  }
+  function endsWith(str = '', target, pos = str.length) {  
+    return str[pos - 1] === target;
+  }
+  function escape(str = '') {
+    return str.replace(/[\&\<\>\"\'\`]/, it => {
+      switch(it) {
+        case "&" : return "&amp";
+        case "<" : return "&lt";
+        case ">" : return "&gt";
+        case '"' : return "&quot";
+        case "'" : return "&apos";
+        case "`" : return "&grave";
+        default : return it;
+      }
+    });
   }
 
   return {
@@ -1896,5 +2056,17 @@ var anlianghui = function () {
     result,
     set,
     setWith,
+    toPairs,
+    toPairsIn,
+    transform,
+    unset,
+    update,
+    updateWith,
+    values,
+    valuesIn,
+    camelCase,
+    capitalize,
+    endsWith,
+    escape,
   };
 }()
