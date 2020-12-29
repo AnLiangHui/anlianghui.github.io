@@ -1646,6 +1646,57 @@ var anlianghui = function () {
     }
     return res;
   }
+  function result(obj, path, defaultValue) {  
+    if (isString(path)) {
+      let reg = /\w+/g;
+      path = path.match(reg);
+    }
+    for (let v of path) {
+      if (obj[v]) {
+        if (isFunction(obj[v])) {
+          obj = obj[v]();
+        }else {
+          obj = obj[v];
+        }
+      }else {
+        if (isFunction(defaultValue)) {
+          return defaultValue();
+        }else {
+          return defaultValue;
+        }
+      }
+    }
+    return obj;
+  }
+  function set(obj, path, val) {  
+    if (isString(path)) {
+      let reg = /\w+/g;
+      path = path.match(reg);
+    }
+    let t = obj;
+    for (let i in path) {
+      if (!t[path[i]]) {
+        if (isNumber(path[i + 1])) {
+          t[path[i]] = [];
+        }else {
+          if (i == path.length - 1) {
+            t[path[i]] = val;
+          }else {
+            t[path[i]] = {};
+          } 
+        }
+      }else {
+        if (i == path.length - 1) {
+          t[path[i]] = val;
+        }
+      }
+      t = t[path[i]];
+    }
+    return obj;
+  }
+  function setWith(obj, path, val, func) {
+    return set(obj, path, func(val));
+  }
 
   return {
     chunk,
@@ -1842,5 +1893,8 @@ var anlianghui = function () {
     omitBy,
     pick,
     pickBy,
+    result,
+    set,
+    setWith,
   };
 }()
