@@ -1531,7 +1531,7 @@ var anlianghui = function () {
     let res = [];
     let o = {};
     if (!isObject(obj)) {
-      for (let i in obj) {
+      for (let i = 0; i < obj.length; i ++) {
         o[i] = obj[i];
       }
       obj = o;
@@ -1581,7 +1581,9 @@ var anlianghui = function () {
           for (let i in it[k]) {
             if (obj[k][i]) {
               for (let o in it[k][i]) {
-                obj[k][i][o] = it[k][i][o];
+                if (obj[k][i][o] !== it[k][i][o]) {
+                  obj[k][i][o] = it[k][i][o];
+                }
               }
             }else {
               obj[k].push(it[k][i]);
@@ -1597,11 +1599,12 @@ var anlianghui = function () {
   function mergeWith(obj, ...sources) {  
     let func = sources.pop();
     sources.forEach(it => {
-      for (let k in it) {
-        if (obj[k]) {
-          obj[k] = func(obj[k], it[k], k, obj, it);
+      let arr = Object.keys(it);
+      for (let v of arr) {
+        if (obj[v]) {
+          obj[v] = func(obj[v], it[v], v, obj, it);
         }else {
-          obj[k] = it[k];
+          obj[v] = it[v];
         }
       }
     });
