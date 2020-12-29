@@ -1347,13 +1347,19 @@ var anlianghui = function () {
     return res;
   }
   function defaults(obj, ...sources) {
+    let t = {};
     if (sources !== undefined) {
       sources.forEach(it => {
-        for (let k in it) {
-          if (!obj[k]) obj[k] = it[k];
+        let arr = Object.keys(it);
+        for (let v of arr) {
+          if (!obj[v]) obj[v] = it[v];
         }
       });
     }
+    for (let k in obj) {
+      t[k] = obj[k];
+    }
+    obj = t;
     return obj;
   }
   function defaultsDeep(obj, ...sources) {  
@@ -1374,18 +1380,20 @@ var anlianghui = function () {
   }
   function findKey(obj, func = identity) { 
     func = isSame(func); 
-    for (let k in obj) {
-      if (func(obj[k])) {
-        return k;
+    let arr = Object.keys(obj);
+    for (let v of arr) {
+      if (func(obj[v])) {
+        return v;
       }
     }
   }
   function findLastKey(obj, func = identity) {  
     func = isSame(func);
     let res;
-    for (let k in obj) {
-      if (func(obj[k])) {
-        res = k;
+    let arr = Object.keys(obj);
+    for (let v of arr) {
+      if (func(obj[v])) {
+        res = v;
       }
     }
     return res;
@@ -1428,9 +1436,10 @@ var anlianghui = function () {
   }
   function functions(obj) {  
     let res = [];
-    for (let k in obj) {
-      if (obj.__proto__[k] === undefined) {
-        res.push(k);
+    let arr  = Object.keys(obj);
+    for (let v of arr) {
+      if (isFunction(obj[v])) {
+        res.push(v);
       }
     }
     return res;
@@ -1438,7 +1447,9 @@ var anlianghui = function () {
   function functionsIn(obj) {  
     let res = [];
     for (let k in obj) {
-      res.push(k);
+      if (isFunction(obj[k])) {
+        res.push(k);
+      }
     }
     return res;
   }
@@ -1480,14 +1491,16 @@ var anlianghui = function () {
   }
   function invert(obj) {
     let res = {};
-    for (let k in obj) {
+    let arr  = Object.keys(obj);
+    for (let k of arr) {
       res[obj[k]] = k;
     }
     return res;
   }
   function invertBy(obj, func = identity) {  
     let res = {};
-    for (let k in obj) {
+    let arr  = Object.keys(obj);
+    for (let k of arr) {
        res[func(obj[k])] ? res[func(obj[k])].push(k) : res[func(obj[k])] = [k];
     }
     return res;
@@ -1523,10 +1536,9 @@ var anlianghui = function () {
       }
       obj = o;
     }
-    for (let k in obj) {
-      if (obj.__proto__[k] === undefined) {
-        res.push(k);
-      }
+    let arr = Object.keys(obj);
+    for (let v of arr) {
+      res.push(v);
     }
     return res;
   }
@@ -1546,10 +1558,9 @@ var anlianghui = function () {
   }
   function mapKeys(obj, func = identity) {  
     let res = {};
-    for (let k in obj) {
-      if (obj.__proto__[k] === undefined) {
-        res[func(obj[k], k, obj)] = obj[k];
-      }
+    let arr = Object.keys(obj);
+    for (let v of arr) {
+      res[func(obj[v], v, obj)] = obj[v];
     }
     return res;
   }
