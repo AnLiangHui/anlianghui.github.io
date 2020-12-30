@@ -1857,6 +1857,94 @@ var anlianghui = function () {
       }
     });
   }
+  function escapeRegExp(str = '') {  
+    return str.replace(/[\^\$\ \.\*\+\?\(\)\[\]\{\}\|]/g, '\\$&');
+  }
+  function kebabCase(str = '') {  
+    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]+([A-Z])/, '\-$1').replace(/(?<=[a-z])([A-Z])/, '\-$1').toLowerCase();
+  }
+  function lowerCase(str = '') {
+    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]+([A-Z])/, ' $1').replace(/(?<=[a-z])([A-Z])/, ' $1').toLowerCase();
+  }
+  function lowerFirst(str = '') {
+    return str.replace(/\w/, it => it.toLowerCase());  
+  }
+  function pad(str = '', len = 0, chars = ' ') {
+    if (str.length < len) {
+      let n = len - str.length;
+      let l = n / 2 | 0, r = n - l;
+      str = repeat(chars, Math.ceil(l / chars.length)).slice(0, l) + str + repeat(chars, Math.ceil(r / chars.length)).slice(0, r);
+    }
+    return str;
+  }
+  function padEnd(str = '', len = 0, chars = ' ') {
+    if (str.length < len) {
+      let r = len - str.length;
+      str += repeat(chars, Math.ceil(r / chars.length)).slice(0, r);
+    }
+    return str;
+  }
+  function padStart(str = '', len = 0, chars = ' ') {
+    if (str.length < len) {
+      let l = len - str.length;
+      str = repeat(chars, Math.ceil(l / chars.length)).slice(0, l) + str;
+    }
+    return str;
+  }
+  function parseInt(str, radix = 10) {  
+    return Number.parseInt(str, radix);
+  }
+  function repeat(str = '', n = 1) {
+    let res = '';
+    while (n >= 1) {
+      res += str;
+      n --;
+    }
+    return res;
+  }
+  function replace(str = '', pattern, replacement) {  
+    let l = str.slice(0, str.indexOf(pattern));
+    let r = str.slice(l.length + pattern.length);
+    return l + replacement + r;
+  }
+  function snakeCase(str = '') {
+    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]+([A-Z])/, '_$1').replace(/(?<=[a-z])([A-Z])/, '_$1').toLowerCase();
+  }
+  function split(str = '', separator, limit) {  
+    let t = '';
+    let res = [];
+    for (let i in str) {
+      if (str[i] === separator) {
+        res.push(t);
+        t = '';
+      }else {
+        t += str[i];
+        if (+i ===str.length - 1) {
+          res.push(t);
+        }
+      }
+    }
+    if (limit !== undefined && limit < res.length) {
+      res.length = limit;
+    }
+    return res;
+  }
+  function startCase(str = '') {  
+    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]([a-zA-Z])/, ' $1').replace(/(?<=[a-z])([A-Z])/, ' $1').replace(/(?<=\b|[ _-])[a-z]/g, it => it.toUpperCase());
+  }
+  function startsWith(str = '', target, pos = 0) {  
+    return str.slice(pos, pos > 0 ? target.length + 1: target.length) === target;
+  }
+  function toLower(str = '') {  
+    return str.replace(/[A-Z]/g, it => it.toLowerCase());
+  }
+  function toUpper(str = '') {  
+    return str.replace(/[a-z]/g, it => it.toUpperCase());
+  }
+  function trim(str = '', chars = ' ') {  
+    let reg = new RegExp("^{"+chars+"}|{"+chars+"}$", "g");
+    return str.replace(reg, '');
+  }
 
   return {
     chunk,
@@ -2068,5 +2156,21 @@ var anlianghui = function () {
     capitalize,
     endsWith,
     escape,
+    escapeRegExp,
+    kebabCase,
+    lowerCase,
+    lowerFirst,
+    pad,
+    padEnd,
+    padStart,
+    parseInt,
+    repeat,
+    replace,
+    snakeCase,
+    split,
+    startCase,
+    startsWith,
+    toLower,
+    toUpper,
   };
 }()
