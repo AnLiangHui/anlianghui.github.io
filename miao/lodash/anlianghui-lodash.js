@@ -1832,11 +1832,11 @@ var anlianghui = function () {
   }
   function camelCase(str = '') {  
     return str.toLowerCase()
-      .replace(/^[-_ ]*/, '')
-      .replace(/[-_ ][a-z]/g, match => {
+      .replace(/^[\W_]*/, '')
+      .replace(/[\W_][a-z]/g, match => {
         return match[1].toUpperCase();
       })
-      .replace(/[-_ ]*/g, '');
+      .replace(/[\W_]*/g, '');
   }
   function capitalize(str = '') {  
     return str.toLowerCase().replace(/\w/, it => it.toUpperCase());
