@@ -1674,9 +1674,9 @@ var anlianghui = function () {
       path = path.match(reg);
     }
     let t = obj;
-    for (let i in path) {
+    for (let i = 0; i < path.length; i ++) {
       if (!t[path[i]]) {
-        if (path[+i + 1] == 0) {
+        if (path[i + 1] == 0) {
           t[path[i]] = [];
         }else {
           if (i == path.length - 1) {
@@ -1755,7 +1755,7 @@ var anlianghui = function () {
       path = path.match(reg);
     }
     let t = obj;
-    for (let i in path) {
+    for (let i = 0; i < path.length; i ++) {
       if (!t[path[i]]) {
         if (path[+i + 1] == 0) {
           t[path[i]] = [];
@@ -1836,7 +1836,7 @@ var anlianghui = function () {
       .replace(/[-_ ][a-z]/g, match => {
         return match[1].toUpperCase();
       })
-      .replace(/[-_ ]/g, '');
+      .replace(/[-_ ]*/g, '');
   }
   function capitalize(str = '') {  
     return str.toLowerCase().replace(/\w/, it => it.toUpperCase());
@@ -1847,12 +1847,12 @@ var anlianghui = function () {
   function escape(str = '') {
     return str.replace(/[\&\<\>\"\'\`]/, it => {
       switch(it) {
-        case "&" : return "&amp";
-        case "<" : return "&lt";
-        case ">" : return "&gt";
-        case '"' : return "&quot";
-        case "'" : return "&apos";
-        case "`" : return "&grave";
+        case "&" : return "&amp;";
+        case "<" : return "&lt;";
+        case ">" : return "&gt;";
+        case '"' : return "&quot;";
+        case "'" : return "&apos;";
+        case "`" : return "&grave;";
         default : return it;
       }
     });
