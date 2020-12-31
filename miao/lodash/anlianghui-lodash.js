@@ -1861,7 +1861,7 @@ var anlianghui = function () {
     return str.replace(/[\^\$\ \.\*\+\?\(\)\[\]\{\}\|]/g, '\\$&');
   }
   function kebabCase(str = '') {  
-    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]+([A-Z])/, '\-$1').replace(/(?<=[a-z])([A-Z])/, '\-$1').toLowerCase();
+    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[\W]+([A-Z])/, '\-$1').replace(/(?<=[a-z])([A-Z])/, '\-$1').toLowerCase();
   }
   function lowerCase(str = '') {
     return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]+([A-Z])/, ' $1').replace(/(?<=[a-z])([A-Z])/, ' $1').toLowerCase();
@@ -1908,7 +1908,7 @@ var anlianghui = function () {
     return l + replacement + r;
   }
   function snakeCase(str = '') {
-    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]+([A-Z])/, '_$1').replace(/(?<=[a-z])([A-Z])/, '_$1').toLowerCase();
+    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[\W]+([A-Z])/, '_$1').replace(/(?<=[a-z])([A-Z])/, '_$1').toLowerCase();
   }
   function split(str = '', separator, limit) {  
     let t = '';
