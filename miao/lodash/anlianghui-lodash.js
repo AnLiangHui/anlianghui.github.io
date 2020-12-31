@@ -663,7 +663,36 @@ var anlianghui = function () {
     return res;
   }
   function zipObjectDeep(props = [], val = []) {  
-   
+    let res = {};
+    let j = 0;
+    props.forEach(it => {
+      if (isString(it)) {
+        let reg = /\w+/g;
+        it = it.match(reg);
+        let t = res;
+        for (let i = 0; i < it.length; i ++) {
+          if (!t[it[i]]) {
+            if (it[i + 1] == 0) {
+              t[it[i]] = [];
+            }else {
+              if (i == it.length - 1) {
+                t[it[i]] = val[j];
+                j ++;
+              }else {
+                t[it[i]] = {};
+              } 
+            }
+          }else {
+            if (i == it.length - 1) {
+              t[it[i]] = val[j];
+              j ++;
+            }
+          }
+          t = t[it[i]];
+        }
+      }
+    });
+    return res;
   }
   function zipWith(...arrs) { 
     let func = arrs[arrs.length - 1];
@@ -1983,7 +2012,39 @@ var anlianghui = function () {
   function upperFirst(str = '') {
     return str.replace(/\w/, it => it.toUpperCase());  
   }
-  
+  function words(str = '', pattern) {
+    if (pattern == undefined) {
+      pattern = new RegExp(/\w+/, 'g');
+    }
+    return str.match(pattern);
+  }
+  function defaultTo(val, defaultValue) {
+    if (isNaN(val) || isNil(val)) {
+      return defaultValue;
+    }else {
+       return val;
+    }
+  }
+  function range(start = 0, end, step = 1) {  
+    let res = [];
+    if (end == undefined) {
+      if (start < 0) {
+        step = -1;
+      }
+      end = start;
+      start = 0;
+    }
+    let len = Math.abs((end - start) / (step == 0 ? 1 : step));
+    for (let i = 0; i < len; i ++) {
+      res.push(start);
+      start += step;
+    }
+    return res;
+  }
+  function rangeRight(start = 0, end, step = 1) {  
+    return reverse(range(start, end, step));
+  }
+
   return {
     chunk,
     compact,
@@ -2217,5 +2278,9 @@ var anlianghui = function () {
     unescape,
     upperCase,
     upperFirst,
+    words,
+    defaultTo,
+    range,
+    rangeRight,
   };
 }()
