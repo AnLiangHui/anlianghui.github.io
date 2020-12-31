@@ -1861,7 +1861,7 @@ var anlianghui = function () {
     return str.replace(/[\^\$\ \.\*\+\?\(\)\[\]\{\}\|]/g, '\\$&');
   }
   function kebabCase(str = '') {  
-    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[\W]+([A-Z])/, '\-$1').replace(/(?<=[a-z])([A-Z])/, '\-$1').toLowerCase();
+    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[\W_]+([A-Z])/, '\-$1').replace(/(?<=[a-z])([A-Z])/, '\-$1').toLowerCase();
   }
   function lowerCase(str = '') {
     return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]+([A-Z])/, ' $1').replace(/(?<=[a-z])([A-Z])/, ' $1').toLowerCase();
