@@ -1941,11 +1941,49 @@ var anlianghui = function () {
   function toUpper(str = '') {  
     return str.replace(/[a-z]/g, it => it.toUpperCase());
   }
-  function trim(str = '', chars = ' ') {  
-    let reg = new RegExp("^{"+chars+"}|{"+chars+"}$", "g");
+  function trim(str = '', chars = '\\s') {  
+    let reg = new RegExp("^["+chars+"]*|["+chars+"]*$", "g");
     return str.replace(reg, '');
   }
-
+  function trimEnd(str = '', chars = '\\s') {  
+    let reg = new RegExp("["+chars+"]*$", "g");
+    return str.replace(reg, '');
+  }
+  function trimStart(str = '', chars = '\\s') {  
+    let reg = new RegExp("^["+chars+"]*", "g");
+    return str.replace(reg, '');
+  }
+  function truncate(str = '', options = {}) {  
+    if (options.length == undefined || options.length > 30) options.length = 30;
+    if (options.omission == undefined) options.omission = '...';
+    let sStart = str.slice(0, options.length - options.omission.length);
+    if (options.separator !== undefined) {
+      let reg = new RegExp(options.separator, "g");
+      let arr = sStart.match(reg);
+      sStart = sStart.slice(0, sStart.lastIndexOf(arr[arr.length - 1]))
+    }
+    return sStart + options.omission;
+  }
+  function unescape(str = '') {  
+    return str.replace(/(\&amp;)|(\&lt;)|(\&gt;)|(\&quot;)|(\&apos;)|(\&grave;)/, it => {
+      switch(it) {
+        case "&amp;" : return "&";
+        case "&lt;" : return "<";
+        case "&gt;" : return ">";
+        case '&quot;' : return '"';
+        case "&apos;" : return "'";
+        case "&grave;" : return "`";
+        default : return it;
+      }
+    });
+  }
+  function upperCase(str = '') {  
+    return str.replace(/^[ _-]*|[ _-]*$/g, '').replace(/[ _-]+([A-Za-z])/, ' $1').replace(/(?<=[a-z])([A-Z])/, ' $1').toUpperCase();
+  }
+  function upperFirst(str = '') {
+    return str.replace(/\w/, it => it.toUpperCase());  
+  }
+  
   return {
     chunk,
     compact,
@@ -2172,5 +2210,12 @@ var anlianghui = function () {
     startsWith,
     toLower,
     toUpper,
+    trim,
+    trimEnd,
+    trimStart,
+    truncate,
+    unescape,
+    upperCase,
+    upperFirst,
   };
 }()
