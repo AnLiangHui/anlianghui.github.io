@@ -2044,6 +2044,131 @@ var anlianghui = function () {
   function rangeRight(start = 0, end, step = 1) {  
     return reverse(range(start, end, step));
   }
+  function times(n, func = identity) {  
+    let res = [];
+    for (let i = 0; i < n; i ++) {
+      res.push(func(i));
+    }
+    return res;
+  }
+  function toPath(val) {  
+    let reg = /\w+/g;
+    val = val.match(reg);
+    return val;
+  }
+  function cloneDeep(val) {  
+    let res = isArray(val) ? [] : {};
+    res = JSON.parse(JSON.stringify(val));
+    return res;
+  }
+  function pullAt(arr, ...indexs) {  
+    let res = [], i = 1;
+    let cop = cloneDeep(arr);
+    indexs = flatten(indexs);
+    indexs.forEach(it => {
+      if (!arr[it] || arr[it] !== cop[it]) {
+        res.push(arr.splice(it - i, 1));
+        i ++;
+      }else {
+        res.push(arr.splice(it, 1));
+      }
+    });
+    return flatten(res);
+  }
+  function matches(source) {  
+    return function (obj) {  
+      for (let k in source) {
+        if (source[k] !== obj[k]) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+  function unary(func) {  
+    return ary(func, 1);
+  }
+  function negate(func) {  
+    return function (...v) {  
+      return !func(...v);
+    }
+  }
+  function property(path) {  
+    if (isString(path)) {
+      path = toPath(path);
+    }
+    return function (obj) {
+      let t = obj;
+      path.forEach(it => {
+        t = t[it];
+      });
+      return t;
+    }
+  }
+  function spread(func, start = 0) {  
+    return function (ary) {  
+      return func(...ary.slice(start));
+    }
+  }
+  function memoize(func, resolver) {
+    let map = new Map();
+    return function(args) {
+        if (map.has(args)) {
+            return map.get(args);
+        } else {
+            let res = func.call(this, args);
+            if (resolver !== undefined) {
+              res = resolver(res);
+            }
+            map.set(args, res);
+            return res;
+        }
+    }
+  }
+  function conforms(source) {  
+    return function (obj) {
+      for (let k in source) {
+        if(!source[k](obj[k])) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+  function constant(val) {  
+    return function () {  
+      return val;
+    }
+  }
+  function flow(funcs) {  
+    return function (...vals) {  
+      let res = vals;
+      funcs.forEach(it => {
+        if (isArray(res)) {
+          res = it(...res);
+        }else {
+          res = it(res);
+        }
+      });
+      return res;
+    }
+  }
+  function method(path, args) {
+      if (isString(path)) {
+        path = toPath(path);
+      }
+      return function (obj) {
+        let t = obj;
+        path.forEach(it => {
+          t = t[it];
+        });
+        if (args === undefined) { 
+          return t();
+        }else {
+          return t.apply(...args);
+        }
+      }
+  }
 
   return {
     chunk,
@@ -2282,5 +2407,18 @@ var anlianghui = function () {
     defaultTo,
     range,
     rangeRight,
+    times,
+    toPath,
+    cloneDeep,
+    pullAt,
+    matches,
+    unary,
+    negate,
+    property,
+    spread,
+    memoize,
+    conforms,
+    constant,
+    flow,
   };
 }()
