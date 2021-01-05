@@ -954,14 +954,33 @@ var anlianghui = function () {
     }
     return res;
   }
-  function orderBy(arr, func = [identity], orders = ['asc', 'asc']) {  
-    arr.sort((a, b) => {
-        if (orders[0] == 'asc') {
-          return a[func[0]] - b[func[0]];
-        }else {
-          return b[func[0]] - a[func[0]];
-        }
-    });
+  function orderBy(arr, func = [identity], orders) {  
+    if (!isArray(func)) {
+      func = [func];
+    }
+    if (orders == undefined) {
+      orders = [];
+      orders.length = func.length;
+    }
+    for (let i = orders.length - 1; i >= 0; i --) {
+      if (orders[i] == undefined || orders[i] == 'asc') {
+        arr.sort((a, b) => {
+          if (isFunction(func[i])) {
+            return String(func[i](a)).charCodeAt() - String(func[i](b)).charCodeAt();
+          }else {
+            if (isString(a[func[i]])) {
+              return a[func[i]].charCodeAt() - b[func[i]].charCodeAt();
+            }else {
+              return a[func[i]] - b[func[i]];
+            }
+          }
+        }) 
+      }else {
+        arr.sort((a, b) => {
+          return b[func[i]] - a[func[i]];
+        }) 
+      }
+    }
     return arr;
   }
   function partition(arr, func = identity) {  
@@ -2127,7 +2146,8 @@ var anlianghui = function () {
   }
   function conforms(source) {  
     return function (obj) {
-      for (let k in source) {
+      let key = Object.keys(source);
+      for (let k of key) {
         if(!source[k](obj[k])) {
           return false;
         }
@@ -2153,7 +2173,7 @@ var anlianghui = function () {
       return res;
     }
   }
-  function method(path, args) {
+  function method(path, ...args) {
       if (isString(path)) {
         path = toPath(path);
       }
@@ -2165,9 +2185,49 @@ var anlianghui = function () {
         if (args === undefined) { 
           return t();
         }else {
-          return t.apply(...args);
+          return t.apply(null, args);
         }
       }
+  }
+  function methodOf(obj, ...args) {  
+    return function (path) {  
+      let t = obj;
+      if (isString(path)) {
+        path = toPath(path);
+      }
+      path.forEach(it => {
+        t = t[it];
+      });
+      if (args === undefined) { 
+        return t();
+      }else {
+        return t.apply(null, args);
+      }
+    }
+  }
+  function nthArg(n = 0) {
+      return function() {
+        if (n < 0) { 
+          n = arguments.length + n;
+        }
+        return arguments[n];
+      }
+    
+  }
+  function propertyOf(obj) {
+    return function (path) {  
+      let t = obj;
+      if (isString(path)) {
+        path = toPath(path);
+      }
+      path.forEach(it => {
+        t = t[it];
+      });
+      return t;
+    }
+  }
+  function sortBy(collection, iteratees = [identity]) {  
+    return orderBy(collection, iteratees);
   }
 
   return {
@@ -2420,5 +2480,10 @@ var anlianghui = function () {
     conforms,
     constant,
     flow,
+    method,
+    methodOf,
+    nthArg,
+    propertyOf,
+    sortBy,
   };
 }()
