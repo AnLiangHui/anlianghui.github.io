@@ -1189,7 +1189,7 @@ var anlianghui = function () {
   }
   function isObject(val) {  
     return val !== null && typeof val === 'object' || typeof val === 'function';
-  }
+    }
   function isObjectLike(val) {  
     return val !== null && typeof val === 'object';
   }
@@ -2076,7 +2076,14 @@ var anlianghui = function () {
     return val;
   }
   function cloneDeep(val) {  
-    let res = isArray(val) ? [] : {};
+    let res;
+    if (isArray(val)) {
+      res = [];
+    }else if (Object.prototype.toString.call(val) == "[object Object]") {
+      res = {};
+    }else {
+      return val;
+    }
     res = JSON.parse(JSON.stringify(val));
     return res;
   }
